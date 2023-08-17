@@ -6,7 +6,6 @@
     </div>
 </template>
 
-
 <script lang="ts" setup>
 import Intro from '@/components/Intro.vue';
 </script>
