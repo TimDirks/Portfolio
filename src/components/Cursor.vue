@@ -1,7 +1,7 @@
 <template>
     <div
         ref="cursor"
-        class="fixed h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-black"
+        class="pointer-events-none fixed h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white mix-blend-difference"
     />
 </template>
 

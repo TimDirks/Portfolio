@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen cursor-none">
+    <div class="cursor-none bg-white">
         <Cursor />
 
         <RouterView />
