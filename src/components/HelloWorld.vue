@@ -17,6 +17,8 @@ const count = ref(0)
     </p>
   </div>
 
+    Yeah baby
+
   <p>
     Check out
     <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
