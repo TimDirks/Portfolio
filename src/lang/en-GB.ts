@@ -1,0 +1,27 @@
+export default {
+    introduction: {
+        body: 'I\'m Tim Dirks, a web developer with a healthy hunger for intricate projects and a secret crush on visually pleasing websites.',
+        title: 'Hello World!',
+    },
+    socials: {
+        actions: {
+            getInTouch: 'Get in touch with me',
+        },
+        email: {
+            link: 'mailto:tim.dirks{\'@\'}hotmail.com',
+            title: 'Email',
+        },
+        github: {
+            link: 'https://github.com/TimDirks',
+            title: 'Github',
+        },
+        instagram: {
+            link: 'https://www.instagram.com/tim.dirks',
+            title: 'Instagram',
+        },
+        linkedIn: {
+            link: 'https://www.linkedin.com/in/tim-dirks-3125a0139/',
+            title: 'LinkedIn',
+        },
+    },
+};

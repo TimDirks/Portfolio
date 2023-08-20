@@ -2,10 +2,10 @@
     <div>
         <button
             v-if="!socialsShown"
-            class="rounded-full border border-slate-800 px-4 py-2"
+            class="h-10 rounded-full border border-slate-800 px-4"
             @click="toggleSocials"
         >
-            Show others
+            {{ $t('socials.actions.getInTouch') }}
         </button>
 
         <div
@@ -15,17 +15,22 @@
             <a
                 v-for="social in socials"
                 :key="`social-link-${social.name}`"
-                class="inline-block rounded-full border border-slate-800 px-4 py-2"
-                :href="social.link"
+                class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-800"
+                :href="$t(`socials.${social.name}.link`)"
                 target="_blank"
+                :title="$t(`socials.${social.name}.title`)"
             >
-                {{ social.name }}
+                <FontAwesomeIcon
+                    :icon="social.icon"
+                    size="xl"
+                />
             </a>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 import {ref} from 'vue';
 
 const socialsShown = ref<boolean>(false);
@@ -34,20 +39,20 @@ const toggleSocials = () => socialsShown.value = !socialsShown.value;
 
 const socials = [
     {
-        link: 'https://www.linkedin.com/in/tim-dirks-3125a0139/',
-        name: 'LinkedIn',
+        icon: ['fab', 'linkedin'],
+        name: 'linkedIn',
     },
     {
-        link: 'https://github.com/TimDirks',
-        name: 'Github',
+        icon: ['fab', 'github'],
+        name: 'github',
     },
     {
-        link: 'https://www.instagram.com/tim.dirks',
-        name: 'Instragram',
+        icon: ['fab', 'instagram'],
+        name: 'instagram',
     },
     {
-        link: 'mailto:tim.dirks@hotmail.com',
-        name: 'Mail',
+        icon: ['far', 'envelope'],
+        name: 'email',
     },
 ];
 </script>
