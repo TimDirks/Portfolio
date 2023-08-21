@@ -1,11 +1,11 @@
 <template>
     <div class="cursor-none bg-white">
-        <Cursor />
+        <MagicCursor class="z-50" />
 
         <RouterView />
     </div>
 </template>
 
 <script lang="ts" setup>
-import Cursor from '@/components/Cursor.vue';
+import MagicCursor from '@/components/common/MagicCursor.vue';
 </script>

@@ -1,7 +1,8 @@
 <template>
     <div
+        id="magic-cursor"
         ref="cursor"
-        class="pointer-events-none fixed h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white mix-blend-difference"
+        class="pointer-events-none fixed h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white mix-blend-difference transition-opacity duration-300"
     />
 </template>
 
