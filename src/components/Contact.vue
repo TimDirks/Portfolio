@@ -29,7 +29,6 @@
 </template>
 
 <script lang="ts" setup>
-import Btn from '@/components/common/Btn.vue';
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 import {ref} from 'vue';
 
