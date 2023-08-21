@@ -1,20 +1,21 @@
 <template>
     <div class="relative overflow-y-hidden pb-2">
-        <button
-            class="absolute h-10 rounded-full border border-slate-800 px-4 transition-placing duration-1000 ease-in-over-out"
+        <Btn
+            class="absolute h-10 px-4 transition-placement duration-1000 ease-in-over-out"
             :class="[socialsShown ? '-top-16' : 'top-0']"
             @click="toggleSocials"
         >
             {{ $t('socials.actions.getInTouch') }}
-        </button>
+        </Btn>
 
         <div class="space-x-4">
-            <a
+            <Btn
                 v-for="social in socials"
                 :key="`social-link-${social.name}`"
-                class="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-800 transition-placing duration-1000 ease-in-over-out"
+                class="relative inline-flex h-10 w-10 items-center justify-center transition-placement duration-1000 ease-in-over-out"
                 :class="[socialsShown ? 'top-0' : '-top-16', social.delay]"
                 :href="$t(`socials.${social.name}.link`)"
+                tag="a"
                 target="_blank"
                 :title="$t(`socials.${social.name}.title`)"
             >
@@ -22,12 +23,13 @@
                     :icon="social.icon"
                     size="xl"
                 />
-            </a>
+            </Btn>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
+import Btn from '@/components/common/Btn.vue';
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 import {ref} from 'vue';
 

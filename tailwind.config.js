@@ -6,14 +6,20 @@ export default {
     ],
     theme: {
         extend: {
+            backgroundImage: {
+                'dark-backdrop': 'url(\'/src/assets/img/dark-backdrop.jpg\')',
+            },
             colors: {
                 'gray-800': '#1a1a1a',
+            },
+            skew: {
+                45: '45deg',
             },
             transitionDelay: {
                 900: '900ms',
             },
             transitionProperty: {
-                placing: 'top, right, bottom, left',
+                placement: 'top, right, bottom, left',
             },
             transitionTimingFunction: {
                 'in-over-out': 'cubic-bezier(.45, -.35, .55, 1.35)',
