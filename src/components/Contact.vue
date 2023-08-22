@@ -17,7 +17,6 @@
                 :href="$t(`socials.${social.name}.link`)"
                 tag="a"
                 target="_blank"
-                :title="$t(`socials.${social.name}.title`)"
             >
                 <FontAwesomeIcon
                     :icon="social.icon"

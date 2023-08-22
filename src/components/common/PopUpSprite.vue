@@ -84,8 +84,8 @@ const pickNewAnimation = () => {
 const randomizeNewPopUp = () => {
     clearTimeout(popUpTimer);
 
-    // Generate a random delay between 15s and 2m 15s for the pop-up animations.
-    const randomDelay = (~~(Math.random() * (60 * 2)) + 15) * 1000;
+    // Generate a random delay between 1m and 3m for the pop-up animations.
+    const randomDelay = (~~(Math.random() * (60 * 2)) + 60) * 1000;
 
     popUpTimer = setTimeout(generateNewPosition, randomDelay);
 };

@@ -14,19 +14,15 @@ export default {
         },
         email: {
             link: 'mailto:tim.dirks{\'@\'}hotmail.com',
-            title: 'Email',
         },
         github: {
             link: 'https://github.com/TimDirks',
-            title: 'Github',
         },
         instagram: {
             link: 'https://www.instagram.com/tim.dirks',
-            title: 'Instagram',
         },
         linkedIn: {
             link: 'https://www.linkedin.com/in/tim-dirks-3125a0139/',
-            title: 'LinkedIn',
         },
     },
 };
