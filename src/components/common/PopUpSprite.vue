@@ -32,6 +32,11 @@ const spriteAngleOffsets = {
 
 const spriteAnimationClasses = [
     'animate-look-left-right',
+    'animate-look-right-left',
+    'animate-walk-left',
+    'animate-walk-right',
+    'animate-wiggle-left',
+    'animate-wiggle-right',
 ];
 
 const generateNewPosition = () => {
@@ -45,7 +50,7 @@ const generateNewPosition = () => {
 
     // If the sprite is on the top or bottom edge, the negative offset needs to be bigger
     // to hide the sprite legs.
-    const huggingEdgeOffset = placementOrder[1] === topOrBottom ? -1.25 : -.5;
+    const huggingEdgeOffset = placementOrder[1] === topOrBottom ? -1 : -.5;
 
     // Generate a random degree with 1 decimal point between -5.0 and 5.0 for sprite rotation.
     const angle = ~~(Math.random() * 100) / 10 - 5;
@@ -56,7 +61,7 @@ const generateNewPosition = () => {
     randomPosition.value = [
         `${placementOrder[0]}: ${edgeOffset}%`,
         `${placementOrder[1]}: ${huggingEdgeOffset}rem`,
-        `transform: rotate(${spriteAngle.value}deg)`,
+        `transform: rotateZ(${spriteAngle.value}deg)`,
     ];
 
     pickNewAnimation();
