@@ -1,0 +1,21 @@
+@keyframes look-left-right {
+    0%, 100% {
+        transform: translateY(100%);
+    }
+
+    15%, 85% {
+        transform: translateY(-10%);
+    }
+
+    20%, 80% {
+        transform: translateY(0);
+    }
+
+    25%, 75% {
+        transform: scaleX(1);
+    }
+
+    40%, 60% {
+        transform: scaleX(-1);
+    }
+}

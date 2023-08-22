@@ -4,7 +4,9 @@
         :style="randomPosition"
     >
         <img
+            ref="spriteImage"
             class="h-24"
+            :class="spriteAnimationClass"
             src="@/assets/img/sprite-tim.png"
             @click="generateNewPosition"
         >
@@ -12,10 +14,14 @@
 </template>
 
 <script lang="ts" setup>
-import {onMounted, ref} from 'vue';
+import {onBeforeUnmount, onMounted, ref} from 'vue';
+
+let popUpTimer = 0;
 
 const randomPosition = ref<string[]>([]);
 const spriteAngle = ref<number>(0);
+const spriteAnimationClass = ref<string>('translate-y-full');
+const spriteImage = ref<HTMLImageElement>();
 
 const spriteAngleOffsets = {
     bottom: 0,
@@ -23,6 +29,10 @@ const spriteAngleOffsets = {
     top: 180,
     right: 270,
 };
+
+const spriteAnimationClasses = [
+    'animate-look-left-right',
+];
 
 const generateNewPosition = () => {
     const leftOrRight = Math.random() < .5 ? 'left' : 'right';
@@ -48,7 +58,46 @@ const generateNewPosition = () => {
         `${placementOrder[1]}: ${huggingEdgeOffset}rem`,
         `transform: rotate(${spriteAngle.value}deg)`,
     ];
+
+    pickNewAnimation();
+    randomizeNewPopUp();
 };
 
-onMounted(generateNewPosition);
+// At the end of an animation, hide the sprite offscreen.
+const onAnimationEnd = () => {
+    if (!spriteImage.value) return;
+
+    spriteAnimationClass.value = 'translate-y-full';
+};
+
+const pickNewAnimation = () => {
+    const randomAnimationIndex = ~~(Math.random() * spriteAnimationClasses.length);
+
+    spriteAnimationClass.value = spriteAnimationClasses[randomAnimationIndex];
+};
+
+const randomizeNewPopUp = () => {
+    clearTimeout(popUpTimer);
+
+    // Generate a random delay between 15s and 2m 15s for the pop-up animations.
+    const randomDelay = (~~(Math.random() * (60 * 2)) + 15) * 1000;
+
+    popUpTimer = setTimeout(generateNewPosition, randomDelay);
+};
+
+onMounted(() => {
+    randomizeNewPopUp();
+
+    if (!spriteImage.value) return;
+
+    spriteImage.value.addEventListener('animationend', onAnimationEnd);
+});
+
+onBeforeUnmount(() => {
+    clearTimeout(popUpTimer);
+
+    if (!spriteImage.value) return;
+
+    spriteImage.value.removeEventListener('animationend', onAnimationEnd);
+});
 </script>

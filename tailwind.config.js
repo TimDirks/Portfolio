@@ -6,6 +6,9 @@ export default {
     ],
     theme: {
         extend: {
+            animation: {
+                'look-left-right': 'look-left-right 2s forwards ease-in-out 1',
+            },
             backgroundImage: {
                 'dark-backdrop': 'url(\'/src/assets/img/dark-backdrop.jpg\')',
             },
