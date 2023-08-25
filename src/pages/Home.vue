@@ -1,12 +1,14 @@
 <template>
-    <div class="grid grid-cols-2">
+    <div class="grid grid-cols-2 items-center">
         <div>
             <Intro class="mb-4" />
 
             <Contact />
         </div>
 
-        <Portrait />
+        <div class="text-center">
+            <Portrait class="inline-block" />
+        </div>
     </div>
 </template>
 

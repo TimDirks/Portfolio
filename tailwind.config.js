@@ -16,6 +16,7 @@ export default {
             },
             backgroundImage: {
                 'dark-backdrop': 'url(\'/src/assets/img/dark-backdrop.jpg\')',
+                'gradient-rad-dark': 'radial-gradient(#24242E 0%, #22222A 20%, #19191F 40%, #111116 60%, #08080C 80%, #030305 100%)',
             },
             colors: {
                 'gray-800': '#1a1a1a',
