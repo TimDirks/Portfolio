@@ -5,8 +5,8 @@ export default {
         codeBaseLinkText: 'code base here',
     },
     introduction: {
-        body: 'I\'m Tim Dirks, a web developer with a healthy hunger for intricate projects and a secret crush on visually pleasing websites.',
-        title: 'Hello World!',
+        body: 'Software engineer & Front end wizkid',
+        title: 'Tim Dirks',
     },
     socials: {
         actions: {

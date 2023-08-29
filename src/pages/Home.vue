@@ -1,19 +1,12 @@
 <template>
-    <div class="grid grid-cols-2 items-center">
-        <div>
-            <Intro class="mb-4" />
+    <div>
+        <Intro class="mb-4 text-center" />
 
-            <Contact />
-        </div>
-
-        <div class="text-center">
-            <Portrait class="inline-block" />
-        </div>
+        <Contact />
     </div>
 </template>
 
 <script lang="ts" setup>
 import Contact from '@/components/Contact.vue';
 import Intro from '@/components/Intro.vue';
-import Portrait from '@/components/common/Portrait.vue';
 </script>

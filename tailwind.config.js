@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import plugin from 'tailwindcss/plugin';
+
 export default {
     content: [
         './index.html',
@@ -14,15 +16,22 @@ export default {
                 'wiggle-left': 'wiggle-left 2s ease-in-out 1',
                 'wiggle-right': 'wiggle-right 2s ease-in-out 1',
             },
-            backgroundImage: {
-                'dark-backdrop': 'url(\'/src/assets/img/dark-backdrop.jpg\')',
-                'gradient-rad-dark': 'radial-gradient(#24242E 0%, #22222A 20%, #19191F 40%, #111116 60%, #08080C 80%, #030305 100%)',
-            },
             colors: {
                 'gray-800': '#1a1a1a',
+                'gray-950': '#141416',
+            },
+            fontFamily: {
+                body: ['Roboto Mono', 'sans-serif'],
+                title: ['Poppins', 'sans-serif'],
+            },
+            fontSize: {
+                '10xl': ['9.5rem', '9rem'],
             },
             skew: {
                 45: '45deg',
+            },
+            textShadow: {
+                DEFAULT: '2px 2px 10px var(--tw-shadow-color)',
             },
             transitionDelay: {
                 900: '900ms',
@@ -35,6 +44,19 @@ export default {
             },
         },
     },
-    plugins: [],
+    plugins: [
+        plugin(function({matchUtilities, theme}) {
+            matchUtilities(
+                {
+                    'text-shadow': (value) => ({
+                        textShadow: value,
+                    }),
+                },
+                {
+                    values: theme('textShadow'),
+                },
+            );
+        }),
+    ],
 };
 
