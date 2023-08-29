@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <Intro class="mb-4 text-center" />
-
-        <Contact />
+    <div class="flex min-h-screen items-center justify-center">
+        <Intro class="mb-4 inline-block text-start" />
     </div>
+
+    <Contact />
 </template>
 
 <script lang="ts" setup>

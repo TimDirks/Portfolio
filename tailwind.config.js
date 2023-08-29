@@ -13,6 +13,7 @@ export default {
                 'look-right-left': 'look-right-left 2s ease-in-out 1',
                 'walk-left': 'walk-left 2s ease-in-out 1',
                 'walk-right': 'walk-right 2s ease-in-out 1',
+                'wiggle': 'wiggle .5s linear infinite',
                 'wiggle-left': 'wiggle-left 2s ease-in-out 1',
                 'wiggle-right': 'wiggle-right 2s ease-in-out 1',
             },
@@ -35,6 +36,7 @@ export default {
             },
             transitionDelay: {
                 900: '900ms',
+                1500: '1500ms',
             },
             transitionProperty: {
                 placement: 'top, right, bottom, left',

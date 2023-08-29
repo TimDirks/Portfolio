@@ -5,8 +5,9 @@ export default {
         codeBaseLinkText: 'code base here',
     },
     introduction: {
-        body: 'Software engineer & Front end wizkid',
+        subtitle: 'Software engineer & Front end wizkid',
         title: 'Tim Dirks',
+        titlePrefix: 'Hi there, I\'m',
     },
     socials: {
         actions: {

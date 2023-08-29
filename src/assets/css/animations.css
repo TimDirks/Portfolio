@@ -1,3 +1,17 @@
+/* Custom Animations */
+@keyframes wiggle {
+    0%, 100% {
+        transform: rotateZ(0);
+    }
+    25% {
+        transform: rotateZ(-5deg);
+    }
+    75% {
+        transform: rotateZ(5deg);
+    }
+}
+
+/* Pop Up Sprite Animations */
 @keyframes look-left-right {
     0%, 100% {
         transform: translateY(100%);

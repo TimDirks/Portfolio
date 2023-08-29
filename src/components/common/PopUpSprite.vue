@@ -8,7 +8,6 @@
             class="h-24"
             :class="spriteAnimationClass"
             src="@/assets/img/sprite-tim.png"
-            @click="generateNewPosition"
         >
     </div>
 </template>
