@@ -17,7 +17,7 @@ import {onBeforeUnmount, onMounted, ref} from 'vue';
 
 let popUpTimer = 0;
 
-const randomPosition = ref<string[]>([]);
+const randomPosition = ref<string[]>(['bottom: 0']);
 const spriteAngle = ref<number>(0);
 const spriteAnimationClass = ref<string>('translate-y-full');
 const spriteImage = ref<HTMLImageElement>();
