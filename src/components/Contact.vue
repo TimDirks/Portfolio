@@ -18,7 +18,7 @@
                 tag="a"
                 target="_blank"
             >
-                <FontAwesomeIcon
+                <FaIcon
                     :icon="social.icon"
                     size="xl"
                 />
@@ -28,7 +28,6 @@
 </template>
 
 <script lang="ts" setup>
-import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 import {ref} from 'vue';
 
 const socialsShown = ref<boolean>(false);

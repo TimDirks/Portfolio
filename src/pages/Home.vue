@@ -1,7 +1,5 @@
 <template>
-    <div class="flex min-h-screen items-center justify-center">
-        <Intro class="mb-4 inline-block text-start" />
-    </div>
+    <Intro />
 
     <Contact />
 </template>
