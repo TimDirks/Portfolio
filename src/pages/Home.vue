@@ -1,7 +1,10 @@
 <template>
-    <Intro @scroll-down="scrollToContact" />
+    <Intro
+        class="mb-2"
+        @scroll-down="scrollToAbout"
+    />
 
-    <About />
+    <About ref="aboutSection" />
 
     <Contact />
 </template>
@@ -10,8 +13,15 @@
 import About from '@/components/About.vue';
 import Contact from '@/components/Contact.vue';
 import Intro from '@/components/Intro.vue';
+import {ref} from 'vue';
 
-const scrollToContact = () => {
-    console.log('Scrolling to next section');
+const aboutSection = ref<HTMLElement>();
+
+const scrollToAbout = () => {
+    if (!aboutSection.value || !aboutSection.value.$el) return;
+
+    aboutSection.value.$el.scrollIntoView({
+        behavior: 'smooth',
+    });
 };
 </script>

@@ -1,13 +1,18 @@
 export default {
     about: {
-        techStack: {
-            gitAlt: 'With any great project, a code hosting platform is essential. In the years I\'ve been an active developer I have learned to use GitHub, GitLab and BitBucket being able to create a Pull Request to implementing Automated workflows.',
-            html5: 'Every web project boils (and compiles) down to the basics; HTML and CSS. Over the years I\'ve learned a lot of nifty little tricks in both HTML and CSS to keep improving my work bit by bit.',
-            js: 'The secret ingredient that solidified my love for Front end. I spend quite some spare time just fiddling around with HTML, CSS and JS seeing what little quirky thing I can come up with next.',
-            placeholder: 'Curious what I use these tools for? Click on them to get my humble opinion and what I can do with them.',
-            sass: 'For most end users it\'s all about the visual. Thanks to Sass, developing something which is not only nice to look at, but also strong on the technical side is so much easier. How did I ever center a div without it.',
-            vuejs: 'What is not to love about an amazing Front end framework? Vue 3 + TypeScript + Tailwind = A very happy me. Sprinkle on top a bit of Vite or Nuxt and I\'m hooked for life.',
+        contact: {
+            body: 'Eager, silly, man bun. Three words (okay, technically four words) that would best describe me.\n\nI love what I do and I take pride in my work, so when it comes to coding, I take it serious. When it comes to something else, maybe not always ;)',
+            title: 'Who I am',
         },
+        knowledge: {
+            body: 'Web development with HTML, TypeScript, Sass & Webpack\n\nVue.js & React including frameworks like Nuxt\n\nUnit testing with Jest & End-to-End testing with Cypress\n\nEven some serious game development with Unity & C#',
+            title: 'What I know',
+        },
+        skills: {
+            body: 'Over 4 years of development experience with large scale Single Page web applications and Visually strong websites\n\nConstantly evolving how to structure projects and write code with new tools and design patterns\n\nOften fiddling to create tiny animations',
+            title: 'What I do',
+        },
+        title: 'The man behind the bun',
     },
     footer: {
         body: 'Curious how I write code? Check out this site\'s {url}',

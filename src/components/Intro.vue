@@ -18,7 +18,7 @@
 
             <div class="overflow-hidden pb-2">
                 <div
-                    class="text-center transition-transform delay-900 duration-1000"
+                    class="pb-2 text-center transition-transform delay-900 duration-1000"
                     :class="{'-translate-y-full': hideIntro}"
                 >
                     <p class="text-xl">
@@ -34,7 +34,7 @@
         </div>
 
         <Btn
-            class="absolute bottom-16 inline-flex h-10 w-10 animate-bounce items-center justify-center transition-opacity delay-1500 duration-1000"
+            class="absolute bottom-[15%] inline-flex h-10 w-10 animate-bounce items-center justify-center transition-opacity delay-1500 duration-1000"
             :class="{'opacity-0': hideIntro}"
             @click="emit('scrollDown')"
         >
@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts" setup>
-import {defineEmits, onMounted, ref} from 'vue';
+import {onMounted, ref} from 'vue';
 
 const emit = defineEmits<{
     (event: 'scrollDown'): void,

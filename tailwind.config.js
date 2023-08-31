@@ -18,8 +18,8 @@ export default {
                 'wiggle-right': 'wiggle-right 2s ease-in-out 1',
             },
             colors: {
-                'gray-800': '#1a1a1a',
-                'gray-950': '#141416',
+                'gray-900': '#1a1a1a',
+                'gray-950': '#151515',
             },
             fontFamily: {
                 body: ['Roboto Mono', 'sans-serif'],
