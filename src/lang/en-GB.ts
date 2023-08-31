@@ -14,6 +14,9 @@ export default {
         },
         title: 'The man behind the bun',
     },
+    contact: {
+        body: 'Eager to see more of me or want to send me a message?',
+    },
     footer: {
         body: 'Curious how I write code? Check out this site\'s {url}',
         codeBaseLink: 'https://github.com/TimDirks/portfolio',
@@ -40,5 +43,20 @@ export default {
         linkedIn: {
             link: 'https://www.linkedin.com/in/tim-dirks-3125a0139/',
         },
+    },
+    work: {
+        editionOne: {
+            body: 'Edition One is an ecommerce web platform for custom made to size suits.\n\nThe project involved technical challenges like a multi-step size calculation wizard and order & account management. All the while the end result needed to be responsive and look visually excellent.',
+            link: 'https://www.edition.one/',
+            linkText: 'Curious? Check out the site',
+            title: 'Edition One',
+        },
+        owow: {
+            body: 'OWOW is the digital agency I have worked many years for. It finally became time to revamp the website which is filled with amazing design.\n\nThe project was created with a combination of Blade and Vue.js and uses Wordpress as the CMS. Amazing animations and other visuals was of the upmost importance in the end result.',
+            link: 'https://www.owow.io/',
+            linkText: 'Curious? Check out the site',
+            title: 'OWOW Site',
+        },
+        title: 'Showcasing what I can',
     },
 };

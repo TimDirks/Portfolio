@@ -17,6 +17,13 @@ export default {
                 'wiggle-left': 'wiggle-left 2s ease-in-out 1',
                 'wiggle-right': 'wiggle-right 2s ease-in-out 1',
             },
+            backgroundImage: {
+                'edition-one-homepage': 'url(\'@/assets/img/edition-one-homepage.png\')',
+                'owow-homepage': 'url(\'@/assets/img/owow-homepage.png\')',
+            },
+            boxShadow: {
+                't-md': '0 -5px 5px 0 var(--tw-shadow-color)',
+            },
             colors: {
                 'gray-900': '#1a1a1a',
                 'gray-950': '#151515',
@@ -27,6 +34,9 @@ export default {
             },
             fontSize: {
                 '10xl': ['9.5rem', '9rem'],
+            },
+            inset: {
+                '1/8': '12.5%',
             },
             skew: {
                 45: '45deg',

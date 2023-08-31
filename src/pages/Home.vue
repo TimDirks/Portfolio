@@ -1,26 +1,31 @@
 <template>
     <Intro
         class="mb-2"
-        @scroll-down="scrollToAbout"
+        @scroll-down="scrollTo(contentSection)"
     />
 
-    <About ref="aboutSection" />
+    <div
+        ref="contentSection"
+        class="flex scroll-mt-8 flex-col gap-y-24"
+    >
+        <About />
 
-    <Contact />
+        <Work />
+    </div>
 </template>
 
 <script lang="ts" setup>
 import About from '@/components/About.vue';
-import Contact from '@/components/Contact.vue';
 import Intro from '@/components/Intro.vue';
+import Work from '@/components/Work.vue';
 import {ref} from 'vue';
 
-const aboutSection = ref<HTMLElement>();
+const contentSection = ref<HTMLDivElement>();
 
-const scrollToAbout = () => {
-    if (!aboutSection.value || !aboutSection.value.$el) return;
+const scrollTo = (section: HTMLDivElement) => {
+    if (!section) return;
 
-    aboutSection.value.$el.scrollIntoView({
+    section.scrollIntoView({
         behavior: 'smooth',
     });
 };

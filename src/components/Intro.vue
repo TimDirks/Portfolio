@@ -34,7 +34,7 @@
         </div>
 
         <Btn
-            class="absolute bottom-[15%] inline-flex h-10 w-10 animate-bounce items-center justify-center transition-opacity delay-1500 duration-1000"
+            class="absolute bottom-1/8 inline-flex h-10 w-10 animate-bounce items-center justify-center transition-opacity delay-1500 duration-1000"
             :class="{'opacity-0': hideIntro}"
             @click="emit('scrollDown')"
         >
