@@ -34,8 +34,9 @@
         </div>
 
         <Btn
-            class="absolute bottom-16 inline-flex h-10 w-10 items-center justify-center transition-opacity delay-1500 duration-1000"
+            class="absolute bottom-16 inline-flex h-10 w-10 animate-bounce items-center justify-center transition-opacity delay-1500 duration-1000"
             :class="{'opacity-0': hideIntro}"
+            @click="emit('scrollDown')"
         >
             <FaIcon
                 :icon="['fas', 'chevron-down']"
@@ -46,7 +47,11 @@
 </template>
 
 <script lang="ts" setup>
-import {onMounted, ref} from 'vue';
+import {defineEmits, onMounted, ref} from 'vue';
+
+const emit = defineEmits<{
+    (event: 'scrollDown'): void,
+}>();
 
 const hideIntro = ref<boolean>(true);
 
@@ -55,6 +60,4 @@ onMounted(() => {
         hideIntro.value = false;
     }, 500);
 });
-
-// TODO Add scroll to bottom feature
 </script>

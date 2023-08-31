@@ -1,7 +1,12 @@
 import {
+    faGitAlt,
     faGithub,
+    faHtml5,
     faInstagram,
+    faJs,
     faLinkedin,
+    faSass,
+    faVuejs,
 } from '@fortawesome/free-brands-svg-icons';
 import {
     faChevronDown,
@@ -15,6 +20,11 @@ library.add(
     faChevronDown,
     faEnvelope,
     faGithub,
+    faGitAlt,
+    faHtml5,
     faInstagram,
+    faJs,
     faLinkedin,
+    faSass,
+    faVuejs,
 );
