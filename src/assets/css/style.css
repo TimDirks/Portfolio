@@ -1,5 +1,6 @@
 @import 'animations.css';
 @import 'typography.css';
+@import 'root.css';
 
 @tailwind base;
 @tailwind components;
