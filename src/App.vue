@@ -1,5 +1,5 @@
 <template>
-    <div class="cursor-none">
+    <div class="lg:cursor-none">
         <MagicCursor class="z-50" />
 
         <RouterView />

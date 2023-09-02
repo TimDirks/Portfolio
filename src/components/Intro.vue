@@ -6,11 +6,11 @@
                     class="transition-transform duration-1000"
                     :class="{'translate-y-full': hideIntro}"
                 >
-                    <p class="text-xl text-red-800">
+                    <p class="text-red-700 xl:text-xl">
                         {{ $t('introduction.titlePrefix') }}
                     </p>
 
-                    <h1 class="font-title text-10xl font-semibold shadow-black/30 text-shadow">
+                    <h1 class="font-title text-8xl font-semibold shadow-black/30 text-shadow xl:text-10xl">
                         {{ $t('introduction.title') }}
                     </h1>
                 </div>
@@ -21,7 +21,7 @@
                     class="pb-2 text-center transition-transform delay-900 duration-1000"
                     :class="{'-translate-y-full': hideIntro}"
                 >
-                    <p class="text-xl">
+                    <p class="xl:text-xl">
                         {{ $t('introduction.subtitle') }}
                     </p>
 
