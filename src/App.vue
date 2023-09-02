@@ -4,7 +4,7 @@
 
         <RouterView />
 
-        <PopUpSprite />
+        <PopUpSprite class="z-10" />
     </div>
 </template>
 

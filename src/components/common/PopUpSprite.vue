@@ -5,7 +5,7 @@
     >
         <img
             ref="spriteImage"
-            class="h-24"
+            class="h-16 md:h-24"
             :class="spriteAnimationClass"
             src="@/assets/img/sprite-tim.png"
         >

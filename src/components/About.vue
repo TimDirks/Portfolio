@@ -4,12 +4,12 @@
             {{ $t('about.title') }}
         </h1>
 
-        <div class="grid grid-cols-2 gap-4 xl:grid-cols-3">
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             <div
                 v-for="(section, index) in aboutSections"
                 :key="`about-section-${section.title}`"
                 class="rounded-xl border border-slate-800 bg-gray-950 p-4 transition hover:-translate-y-2 hover:shadow-md hover:shadow-gray-500"
-                :class="!(index % 2) && index + 1 === aboutSections.length ? 'col-span-2 w-1/2 mx-auto xl:col-auto xl:w-full xl:mx-0' : ''"
+                :class="{'md:col-span-2 md:mx-auto md:w-1/2 xl:col-auto xl:mx-0 xl:w-full': !(index % 2) && index + 1 === aboutSections.length}"
             >
                 <div class="mb-4 text-center uppercase">
                     <div class="inline-block border-b px-2 pb-2 text-center">

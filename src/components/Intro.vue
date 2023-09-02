@@ -10,7 +10,7 @@
                         {{ $t('introduction.titlePrefix') }}
                     </p>
 
-                    <h1 class="font-title text-8xl font-semibold shadow-black/30 text-shadow xl:text-10xl">
+                    <h1 class="font-title text-6xl font-semibold shadow-black/30 text-shadow md:text-8xl xl:text-10xl">
                         {{ $t('introduction.title') }}
                     </h1>
                 </div>
@@ -26,7 +26,7 @@
                     </p>
 
                     <img
-                        class="mt-4 inline-block w-40 hover:animate-wiggle"
+                        class="mt-4 inline-block w-24 hover:animate-wiggle md:w-40"
                         src="@/assets/img/sprite-tim-head.png"
                     >
                 </div>

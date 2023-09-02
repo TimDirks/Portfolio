@@ -6,7 +6,7 @@
 
     <div
         ref="contentSection"
-        class="flex scroll-mt-8 flex-col gap-y-24"
+        class="flex scroll-mt-8 flex-col gap-y-12 md:gap-y-24"
     >
         <About />
 

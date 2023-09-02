@@ -1,6 +1,6 @@
 <template>
     <div class="bg-black shadow-t-md shadow-black">
-        <div class="container mx-auto grid grid-cols-2 gap-4 px-4">
+        <div class="container mx-auto grid gap-4 px-4 md:grid-cols-2">
             <div class="text-center">
                 <Contact />
             </div>
