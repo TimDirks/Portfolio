@@ -4,60 +4,39 @@
             {{ $t('contact.body') }}
         </div>
 
-        <div class="relative overflow-y-hidden pb-2">
+        <div class="space-x-4">
             <Btn
-                class="absolute h-10 px-4 transition-placement duration-1000 ease-in-over-out"
-                :class="[socialsShown ? '-top-16' : 'top-0']"
-                @click="toggleSocials"
+                v-for="social in socials"
+                :key="`social-link-${social.name}`"
+                class="relative inline-flex h-10 w-10 items-center justify-center"
+                :href="$t(`socials.${social.name}.link`)"
+                tag="a"
+                target="_blank"
             >
-                {{ $t('socials.actions.getInTouch') }}
+                <FaIcon
+                    :icon="social.icon"
+                    size="xl"
+                />
             </Btn>
-
-            <div class="space-x-4">
-                <Btn
-                    v-for="social in socials"
-                    :key="`social-link-${social.name}`"
-                    class="relative inline-flex h-10 w-10 items-center justify-center transition-placement duration-1000 ease-in-over-out"
-                    :class="[socialsShown ? 'top-0' : '-top-16', social.delay]"
-                    :href="$t(`socials.${social.name}.link`)"
-                    tag="a"
-                    target="_blank"
-                >
-                    <FaIcon
-                        :icon="social.icon"
-                        size="xl"
-                    />
-                </Btn>
-            </div>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import {ref} from 'vue';
-
-const socialsShown = ref<boolean>(false);
-
-const toggleSocials = () => socialsShown.value = !socialsShown.value;
-
 const socials = [
     {
-        delay: 'delay-300',
         icon: ['fab', 'linkedin'],
         name: 'linkedIn',
     },
     {
-        delay: 'delay-500',
         icon: ['fab', 'github'],
         name: 'github',
     },
     {
-        delay: 'delay-700',
         icon: ['fab', 'instagram'],
         name: 'instagram',
     },
     {
-        delay: 'delay-900',
         icon: ['far', 'envelope'],
         name: 'email',
     },

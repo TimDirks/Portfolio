@@ -46,7 +46,7 @@ export default {
     },
     work: {
         editionOne: {
-            body: 'Edition One is an ecommerce web platform for custom made to size suits.\n\nThe project involved technical challenges like a multi-step size calculation wizard and order & account management. All the while the end result needed to be responsive and look visually excellent.',
+            body: 'Edition One is an ecommerce web platform for custom, made to size suits.\n\nThe project involved technical challenges like a multi-step size calculation wizard and order & account management. All the while the end result needed to be responsive and look visually excellent.',
             link: 'https://www.edition.one/',
             linkText: 'Curious? Check out the site',
             title: 'Edition One',

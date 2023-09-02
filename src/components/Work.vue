@@ -25,7 +25,7 @@
                     </div>
 
                     <a
-                        class="text-slate-300 hover:underline"
+                        class="text-slate-400 hover:underline"
                         :href="$t(`work.${workCase.case}.link`)"
                         target="_blank"
                     >
