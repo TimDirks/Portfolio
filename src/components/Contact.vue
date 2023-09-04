@@ -33,6 +33,10 @@ const socials = [
         name: 'github',
     },
     {
+        icon: ['fab', 'codepen'],
+        name: 'codepen',
+    },
+    {
         icon: ['fab', 'instagram'],
         name: 'instagram',
     },

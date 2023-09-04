@@ -8,6 +8,7 @@ import {
     faLaptopCode,
 } from '@fortawesome/free-solid-svg-icons';
 import {
+    faCodepen,
     faGithub,
     faInstagram,
     faLinkedin,
@@ -18,6 +19,7 @@ library.add(
     faAddressCard,
     faBrain,
     faChevronDown,
+    faCodepen,
     faEnvelope,
     faGithub,
     faInstagram,
