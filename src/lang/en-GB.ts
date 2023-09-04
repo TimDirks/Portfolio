@@ -31,6 +31,9 @@ export default {
         actions: {
             getInTouch: 'Get in touch with me',
         },
+        codepen: {
+            link: 'https://codepen.io/timdirks',
+        },
         email: {
             link: 'mailto:tim.dirks{\'@\'}hotmail.com',
         },
