@@ -24,15 +24,6 @@ export default defineNuxtConfig({
     css: [
         '~/assets/scss/animations.scss',
     ],
-    // experimental: {
-    //     defaults: {
-    //         useAsyncData: {
-    //             deep: false,
-    //         },
-    //     },
-    //     headNext: true,
-    //     typedPages: true,
-    // },
     /* </Nuxt root config> */
 
     /* <Module options> */
