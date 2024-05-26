@@ -5,13 +5,15 @@ definePageMeta({
 
 const contentSection = ref<HTMLDivElement>();
 
-const scrollTo = (section: HTMLDivElement) => {
-    if (!section) return;
+function scrollTo(section: HTMLDivElement) {
+    if (!section) {
+        return;
+    }
 
     section.scrollIntoView({
         behavior: 'smooth',
     });
-};
+}
 </script>
 
 <template>

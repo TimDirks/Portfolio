@@ -21,8 +21,8 @@ const workCases = [
             <div
                 v-for="workCase in workCases"
                 :key="`work-case-${workCase.case}`"
-                class="group relative overflow-hidden rounded-xl bg-center p-4"
                 :class="workCase.backgroundImageClass"
+                class="group relative overflow-hidden rounded-xl bg-center p-4"
             >
                 <div class="absolute inset-0 bg-black opacity-80 transition-opacity group-hover:opacity-80 xl:opacity-0" />
 
@@ -38,8 +38,8 @@ const workCases = [
                     </div>
 
                     <NuxtLink
-                        class="text-slate-400 hover:underline"
                         :to="$t(`work.${workCase.case}.link`)"
+                        class="text-slate-400 hover:underline"
                         target="_blank"
                         external
                     >

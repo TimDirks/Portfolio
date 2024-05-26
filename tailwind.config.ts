@@ -1,5 +1,4 @@
 import plugin from 'tailwindcss/plugin';
-import type {Config} from 'tailwindcss';
 
 export default {
     theme: {
@@ -9,7 +8,7 @@ export default {
                 'look-right-left': 'look-right-left 2s ease-in-out 1',
                 'walk-left': 'walk-left 2s ease-in-out 1',
                 'walk-right': 'walk-right 2s ease-in-out 1',
-                'wiggle': 'wiggle .5s linear infinite',
+                wiggle: 'wiggle .5s linear infinite',
                 'wiggle-left': 'wiggle-left 2s ease-in-out 1',
                 'wiggle-right': 'wiggle-right 2s ease-in-out 1',
             },
@@ -53,10 +52,10 @@ export default {
         },
     },
     plugins: [
-        plugin(function({matchUtilities, theme}) {
+        plugin(({matchUtilities, theme}) => {
             matchUtilities(
                 {
-                    'text-shadow': (value) => ({
+                    'text-shadow': value => ({
                         textShadow: value,
                     }),
                 },
@@ -66,4 +65,4 @@ export default {
             );
         }),
     ],
-} as Config;
+};

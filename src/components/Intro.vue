@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 const emit = defineEmits<{
-    (event: 'scrollDown'): void,
+    (event: 'scrollDown'): void;
 }>();
 
 const hideIntro = ref<boolean>(true);
@@ -17,8 +17,8 @@ onMounted(() => {
         <div class="mb-4 inline-block uppercase tracking-wider">
             <div class="mb-2 overflow-hidden border-b border-white">
                 <div
+                    :class="{ 'translate-y-full': hideIntro }"
                     class="transition-transform duration-1000"
-                    :class="{'translate-y-full': hideIntro}"
                 >
                     <p class="text-red-700 xl:text-xl">
                         {{ $t('introduction.titlePrefix') }}
@@ -32,8 +32,8 @@ onMounted(() => {
 
             <div class="overflow-hidden pb-2">
                 <div
+                    :class="{ '-translate-y-full': hideIntro }"
                     class="pb-2 text-center transition-transform delay-900 duration-1000"
-                    :class="{'-translate-y-full': hideIntro}"
                 >
                     <p class="xl:text-xl">
                         {{ $t('introduction.subtitle') }}
@@ -48,11 +48,14 @@ onMounted(() => {
         </div>
 
         <UiButton
-            class="absolute bottom-1/8 inline-flex h-10 w-10 animate-bounce items-center justify-center transition-opacity delay-1500 duration-1000"
-            :class="{'opacity-0': hideIntro}"
+            :class="{ 'opacity-0': hideIntro }"
+            class="absolute bottom-1/8 inline-flex size-10 animate-bounce items-center justify-center transition-opacity delay-1500 duration-1000"
             @click="emit('scrollDown')"
         >
-            <Icon name="ph:caret-down" size="24" />
+            <Icon
+                name="ph:caret-down"
+                size="24"
+            />
         </UiButton>
     </div>
 </template>

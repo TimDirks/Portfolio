@@ -33,8 +33,8 @@ const socials = [
             <UiButton
                 v-for="social in socials"
                 :key="`social-link-${social.name}`"
-                class="relative inline-flex h-10 w-10 items-center justify-center"
                 :href="$t(`socials.${social.name}.link`)"
+                class="relative inline-flex size-10 items-center justify-center"
                 tag="a"
                 target="_blank"
             >

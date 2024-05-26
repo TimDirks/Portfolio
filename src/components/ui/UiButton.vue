@@ -8,17 +8,21 @@ defineProps({
 
 const magicCursor = ref<HTMLElement>();
 
-const hideMagicCursor = () => {
-    if (!magicCursor.value) return;
+function hideMagicCursor() {
+    if (!magicCursor.value) {
+        return;
+    }
 
     magicCursor.value.classList.toggle('opacity-0', true);
-};
+}
 
-const showMagicCursor = () => {
-    if (!magicCursor.value) return;
+function showMagicCursor() {
+    if (!magicCursor.value) {
+        return;
+    }
 
     magicCursor.value.classList.toggle('opacity-0', false);
-};
+}
 
 onMounted(() => {
     magicCursor.value = document.getElementById('magic-cursor');
