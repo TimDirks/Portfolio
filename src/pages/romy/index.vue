@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 definePageMeta({
-    name: 'games.index',
+    name: 'romy.index',
 });
 </script>
 
 <template>
     <div>
-        Hello
+        Romy
     </div>
 </template>

@@ -13,9 +13,9 @@ const workCases = [
 
 <template>
     <div>
-        <h1 class="mb-6 text-center font-title text-2xl font-semibold uppercase xl:text-3xl">
+        <h3 class="mb-6 text-center">
             {{ $t('work.title') }}
-        </h1>
+        </h3>
 
         <div class="grid gap-4 xl:grid-cols-2">
             <div

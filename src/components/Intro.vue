@@ -24,7 +24,7 @@ onMounted(() => {
                         {{ $t('introduction.titlePrefix') }}
                     </p>
 
-                    <h1 class="font-title text-6xl font-semibold shadow-black/30 text-shadow md:text-8xl xl:text-10xl">
+                    <h1 class="shadow-black/30 text-shadow">
                         {{ $t('introduction.title') }}
                     </h1>
                 </div>

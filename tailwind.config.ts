@@ -52,7 +52,49 @@ export default {
         },
     },
     plugins: [
-        plugin(({matchUtilities, theme}) => {
+        plugin(({addBase, matchUtilities, theme}) => {
+            addBase({
+                body: {
+                    fontSize: theme('fontSize.base'),
+                    fontFamily: theme('fontFamily.body'),
+                    lineHeight: 1.5,
+                    fontWeight: theme('fontWeight.regular'),
+                },
+                'h1,.h1': {
+                    fontSize: theme('fontSize.6xl'),
+                    fontFamily: theme('fontFamily.title'),
+                    lineHeight: 1,
+                    fontWeight: theme('fontWeight.semibold'),
+                    textTransform: 'uppercase',
+                    '@screen md': {
+                        fontSize: theme('fontSize.8xl'),
+                    },
+                    '@screen xl': {
+                        fontSize: theme('fontSize.10xl'),
+                    },
+                },
+                'h2,.h2': {
+                    fontSize: theme('fontSize.3xl'),
+                    fontFamily: theme('fontFamily.title'),
+                    lineHeight: 1.125,
+                    fontWeight: theme('fontWeight.semibold'),
+                    textTransform: 'uppercase',
+                    '@screen xl': {
+                        fontSize: theme('fontSize.4xl'),
+                    },
+                },
+                'h3,.h3': {
+                    fontSize: theme('fontSize.2xl'),
+                    fontFamily: theme('fontFamily.title'),
+                    lineHeight: 1.15,
+                    fontWeight: theme('fontWeight.semibold'),
+                    textTransform: 'uppercase',
+                    '@screen xl': {
+                        fontSize: theme('fontSize.3xl'),
+                    },
+                },
+            });
+
             matchUtilities(
                 {
                     'text-shadow': value => ({
