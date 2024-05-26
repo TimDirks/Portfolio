@@ -1,0 +1,36 @@
+{
+    "name": "portfolio",
+    "type": "module",
+    "private": true,
+    "scripts": {
+        "build": "nuxt build",
+        "dev": "nuxt dev",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix"
+    },
+    "dependencies": {
+        "defu": "^6.1.4",
+        "gsap": "^3.12.2",
+        "nuxt": "^3.10.2",
+        "sharp": "0.32.6",
+        "vue": "^3.4.20",
+        "vue-router": "latest"
+    },
+    "devDependencies": {
+        "@antfu/eslint-config": "^2.4.5",
+        "@eslint/eslintrc": "^3.0.0",
+        "@nuxt/image": "^1.3.0",
+        "@nuxtjs/google-fonts": "^3.1.3",
+        "@nuxtjs/i18n": "^8.1.1",
+        "@nuxtjs/tailwindcss": "^6.11.4",
+        "@types/node": "^20.11.19",
+        "eslint": "8.57.0",
+        "eslint-plugin-tailwindcss": "^3.13.0",
+        "nuxt-icon": "^0.6.8",
+        "sass": "^1.71.0",
+        "typescript": "^5.3.3"
+    }
+}
