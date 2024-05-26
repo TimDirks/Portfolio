@@ -39,10 +39,10 @@ onMounted(() => {
                         {{ $t('introduction.subtitle') }}
                     </p>
 
-                    <img
+                    <NuxtImg
                         class="mt-4 inline-block w-24 hover:animate-wiggle md:w-40"
-                        src="@/assets/img/sprite-tim-head.png"
-                    >
+                        src="/img/sprite-tim-head.png"
+                    />
                 </div>
             </div>
         </div>

@@ -12,13 +12,14 @@
             <div class="text-center">
                 <I18nT keypath="footer.body">
                     <template #url>
-                        <a
+                        <NuxtLink
                             class="text-slate-400 hover:underline"
-                            :href="$t('footer.codeBaseLink')"
+                            :to="$t('footer.codeBaseLink')"
                             target="_blank"
+                            external
                         >
                             {{ $t('footer.codeBaseLinkText') }}
-                        </a>
+                        </NuxtLink>
                     </template>
                 </I18nT>
             </div>

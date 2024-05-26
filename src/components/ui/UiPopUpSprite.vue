@@ -53,7 +53,7 @@ const generateNewPosition = () => {
 
 // At the end of an animation, hide the sprite offscreen.
 const onAnimationEnd = () => {
-    if (!spriteImage.value) return;
+    if (!spriteImage.value.$el) return;
 
     spriteAnimationClass.value = 'translate-y-full';
 };
@@ -76,17 +76,17 @@ const randomizeNewPopUp = () => {
 onMounted(() => {
     randomizeNewPopUp();
 
-    if (!spriteImage.value) return;
+    if (!spriteImage.value.$el) return;
 
-    spriteImage.value.addEventListener('animationend', onAnimationEnd);
+    spriteImage.value.$el.addEventListener('animationend', onAnimationEnd);
 });
 
 onBeforeUnmount(() => {
     clearTimeout(popUpTimer);
 
-    if (!spriteImage.value) return;
+    if (!spriteImage.value.$el) return;
 
-    spriteImage.value.removeEventListener('animationend', onAnimationEnd);
+    spriteImage.value.$el.removeEventListener('animationend', onAnimationEnd);
 });
 </script>
 
@@ -95,11 +95,11 @@ onBeforeUnmount(() => {
         class="fixed"
         :style="randomPosition"
     >
-        <img
+        <NuxtImg
             ref="spriteImage"
             class="h-16 md:h-24"
             :class="spriteAnimationClass"
-            src="@/assets/img/sprite-tim.png"
-        >
+            src="/img/sprite-tim.png"
+        />
     </div>
 </template>

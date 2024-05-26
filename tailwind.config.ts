@@ -14,8 +14,8 @@ export default {
                 'wiggle-right': 'wiggle-right 2s ease-in-out 1',
             },
             backgroundImage: {
-                'edition-one-homepage': 'url(\'@/assets/img/edition-one-homepage.png\')',
-                'owow-homepage': 'url(\'@/assets/img/owow-homepage.png\')',
+                'edition-one-homepage': 'url(\'/img/edition-one-homepage.png\')',
+                'owow-homepage': 'url(\'/img/owow-homepage.png\')',
             },
             boxShadow: {
                 't-md': '0 -5px 5px 0 var(--tw-shadow-color)',

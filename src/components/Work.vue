@@ -37,13 +37,14 @@ const workCases = [
                         {{ $t(`work.${workCase.case}.body`) }}
                     </div>
 
-                    <a
+                    <NuxtLink
                         class="text-slate-400 hover:underline"
-                        :href="$t(`work.${workCase.case}.link`)"
+                        :to="$t(`work.${workCase.case}.link`)"
                         target="_blank"
+                        external
                     >
                         {{ $t(`work.${workCase.case}.linkText`) }}
-                    </a>
+                    </NuxtLink>
                 </div>
             </div>
         </div>
