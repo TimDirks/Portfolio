@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+definePageMeta({
+    name: 'index',
+});
+
 const contentSection = ref<HTMLDivElement>();
 
 const scrollTo = (section: HTMLDivElement) => {
