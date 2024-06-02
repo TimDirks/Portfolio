@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import {filename} from 'pathe/utils';
-import GuessWhoCard from '~/components/guess-who/GuessWhoCard.vue';
 
 const props = defineProps({
     theme: {
@@ -29,7 +28,7 @@ const cards = computed(() => {
 <template>
     <div
         v-if="theme"
-        class="grid grid-cols-8 gap-4"
+        class="grid grid-cols-4 gap-2 md:grid-cols-8 md:gap-4"
     >
         <GuessWhoCard
             v-for="card in cards"
