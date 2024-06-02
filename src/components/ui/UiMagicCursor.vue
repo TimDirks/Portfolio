@@ -16,6 +16,10 @@ function showCursor() {
 }
 
 onMounted(() => {
+    if (!cursor.value) {
+        return;
+    }
+
     const quickToX = gsap.quickTo(cursor.value, 'x', quickToOptions);
     const quickToY = gsap.quickTo(cursor.value, 'y', quickToOptions);
 

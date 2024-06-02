@@ -30,19 +30,14 @@ const socials = [
         </div>
 
         <div class="space-x-4">
-            <UiButton
+            <UiButtonIcon
                 v-for="social in socials"
                 :key="`social-link-${social.name}`"
                 :href="$t(`socials.${social.name}.link`)"
-                class="relative inline-flex size-10 items-center justify-center"
+                :icon="social.icon"
                 tag="a"
                 target="_blank"
-            >
-                <Icon
-                    :name="social.icon"
-                    size="24"
-                />
-            </UiButton>
+            />
         </div>
     </div>
 </template>

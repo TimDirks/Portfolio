@@ -47,15 +47,11 @@ onMounted(() => {
             </div>
         </div>
 
-        <UiButton
+        <UiButtonIcon
             :class="{ 'opacity-0': hideIntro }"
-            class="absolute bottom-1/8 inline-flex size-10 animate-bounce items-center justify-center transition-opacity delay-1500 duration-1000"
+            class="!absolute bottom-1/8 animate-bounce transition-opacity delay-1500 duration-1000"
+            icon="ph:caret-down"
             @click="emit('scrollDown')"
-        >
-            <Icon
-                name="ph:caret-down"
-                size="24"
-            />
-        </UiButton>
+        />
     </div>
 </template>
