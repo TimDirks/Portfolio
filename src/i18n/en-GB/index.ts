@@ -22,6 +22,35 @@ export default {
         codeBaseLink: 'https://github.com/TimDirks/portfolio',
         codeBaseLinkText: 'code base here',
     },
+    guess_who: {
+        title: 'Guess who?',
+        themes: [
+            {
+                label: 'Dieren',
+                key: 'animals',
+            },
+            {
+                label: 'Bekende gezichten',
+                key: 'famous_faces',
+            },
+            {
+                label: 'Gekke gezichten',
+                key: 'funny_faces',
+            },
+            {
+                label: 'Huishoudelijk',
+                key: 'household_objects',
+            },
+            {
+                label: 'Kids',
+                key: 'kids',
+            },
+            {
+                label: 'Monsters',
+                key: 'monsters',
+            },
+        ],
+    },
     introduction: {
         subtitle: 'Software engineer & Front end wizkid',
         title: 'Tim Dirks',
