@@ -24,6 +24,9 @@ export default {
     },
     guess_who: {
         title: 'Guess who?',
+        actions: {
+            reset: 'Reset game',
+        },
         themes: [
             {
                 label: 'Dieren',

@@ -11,6 +11,8 @@ export default defineNuxtPlugin((nuxtApp) => {
         beforeUnmount(el) {
             el.removeEventListener('mouseenter', hideMagicCursor);
             el.removeEventListener('mouseleave', showMagicCursor);
+
+            showMagicCursor();
         },
     });
 });

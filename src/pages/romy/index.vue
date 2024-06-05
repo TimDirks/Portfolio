@@ -2,30 +2,16 @@
 definePageMeta({
     name: 'romy.index',
 });
-
-const selectedTheme = ref<string>();
 </script>
 
 <template>
-    <div>
-        <h2 class="text-center">
+    <div class="container mx-auto my-4 flex grow flex-col px-4 md:my-16">
+        <h2 class="mb-4 text-center">
             {{ $t('guess_who.title') }}
         </h2>
 
-        <div>
-            <UiButton
-                v-for="theme in $tm('guess_who.themes')"
-                :key="`theme-${theme.key}`"
-                @click="selectedTheme = theme.key"
-            >
-                {{ theme.label }}
-            </UiButton>
+        <div class="my-auto">
+            <GuessWhoGameBoard />
         </div>
-
-        <div>
-            Selected: {{ selectedTheme }}
-        </div>
-
-        <GuessWhoGameBoard :theme="selectedTheme" />
     </div>
 </template>
