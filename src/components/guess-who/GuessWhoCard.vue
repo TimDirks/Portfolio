@@ -47,10 +47,16 @@ defineProps({
 
         <div
             v-if="card.selected"
-            class="absolute right-0 top-0 flex size-8 -translate-y-1/4 translate-x-1/4 items-center justify-center rounded-full bg-white shadow"
+            class="absolute right-0 top-0 flex size-5 -translate-y-1/4 translate-x-1/4 items-center justify-center rounded-full bg-white shadow md:size-8"
         >
             <Icon
-                class="text-yellow-400"
+                class="text-yellow-400 md:!hidden"
+                name="ph:star-fill"
+                size="16"
+            />
+
+            <Icon
+                class="text-yellow-400 max-md:!hidden"
                 name="ph:star-fill"
                 size="24"
             />
