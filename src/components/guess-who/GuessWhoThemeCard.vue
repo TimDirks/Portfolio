@@ -23,7 +23,7 @@ defineProps({
             >
         </div>
 
-        <div class="p-2 text-center text-lg">
+        <div class="p-2 text-center text-sm md:py-2 md:text-lg">
             {{ themeCard.name }}
         </div>
     </div>

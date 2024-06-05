@@ -23,26 +23,27 @@ export default {
         codeBaseLinkText: 'code base here',
     },
     guess_who: {
-        select_theme: 'Select the theme',
+        select_card: 'Select a card to play',
+        select_theme: 'Select a theme',
         title: 'Guess who?',
         actions: {
             reset: 'Reset game',
         },
         themes: [
             {
-                label: 'Dieren',
+                label: 'Animals',
                 key: 'animals',
             },
             {
-                label: 'Bekende gezichten',
-                key: 'famous_faces',
+                label: 'Familiar faces',
+                key: 'familiar_faces',
             },
             {
-                label: 'Gekke gezichten',
+                label: 'Funny faces',
                 key: 'funny_faces',
             },
             {
-                label: 'Huishoudelijk',
+                label: 'Household Objects',
                 key: 'household_objects',
             },
             {

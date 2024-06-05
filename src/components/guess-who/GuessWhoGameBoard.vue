@@ -42,6 +42,7 @@ watch(
                 name: filename(key),
                 image: value.default,
                 flipped: false,
+                selected: false,
             }));
     },
     {immediate: true},
@@ -54,20 +55,22 @@ function resetGame() {
 
 // Handle a card click.
 function handleCardClick(card: GuessWhoCard) {
-    // If no card has been selected as the user's, save it as the selected card.
-    if (!selectedCard.value) {
-        selectedCard.value = card;
-
-        return;
-    }
-
-    // Otherwise, the game is in play and a click should flip the card.
     const _card = cards.value.find(c => c.name === card.name);
 
     if (!_card) {
         return;
     }
 
+    // If no card has been selected as the user's, save it as the selected card.
+    if (!selectedCard.value) {
+        selectedCard.value = card;
+
+        _card.selected = true;
+
+        return;
+    }
+
+    // Otherwise, the game is in play and a click should flip the card.
     _card.flipped = !_card.flipped;
 }
 </script>
@@ -77,12 +80,15 @@ function handleCardClick(card: GuessWhoCard) {
         mode="out-in"
         name="fade"
     >
-        <div v-if="!selectedTheme">
-            <h3 class="mb-8 text-center">
+        <div
+            v-if="!selectedTheme"
+            class="space-y-4 md:space-y-8"
+        >
+            <h3 class="text-center">
                 {{ $t('guess_who.select_theme') }}
             </h3>
 
-            <div class="grid grid-cols-3 gap-4 md:grid-cols-6">
+            <div class="grid grid-cols-2 gap-4 md:grid-cols-6">
                 <GuessWhoThemeCard
                     v-for="themeCard in themeCards"
                     :key="`theme-${themeCard.key}`"
@@ -94,7 +100,17 @@ function handleCardClick(card: GuessWhoCard) {
             </div>
         </div>
 
-        <div v-else>
+        <div
+            v-else
+            class="space-y-4"
+        >
+            <h3
+                v-if="!selectedCard"
+                class="text-center"
+            >
+                {{ $t('guess_who.select_card') }}
+            </h3>
+
             <div class="grid grid-cols-4 gap-2 md:grid-cols-8 md:gap-4">
                 <GuessWhoCard
                     v-for="card in cards"
@@ -106,7 +122,7 @@ function handleCardClick(card: GuessWhoCard) {
                 />
             </div>
 
-            <div class="mt-4 text-center">
+            <div class="text-center">
                 <UiButton @click="resetGame">
                     {{ $t('guess_who.actions.reset') }}
                 </UiButton>
