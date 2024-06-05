@@ -73,33 +73,44 @@ function handleCardClick(card: GuessWhoCard) {
 </script>
 
 <template>
-    <template v-if="!selectedTheme">
-        <div class="grid grid-cols-3 gap-4 md:grid-cols-6">
-            <GuessWhoThemeCard
-                v-for="themeCard in themeCards"
-                :key="`theme-${themeCard.key}`"
-                v-hide-magic-cursor
-                :theme-card
-                class="cursor-pointer"
-                @click="selectedTheme = themeCard.key"
-            />
-        </div>
-    </template>
+    <Transition
+        mode="out-in"
+        name="fade"
+    >
+        <div v-if="!selectedTheme">
+            <h3 class="mb-8 text-center">
+                {{ $t('guess_who.select_theme') }}
+            </h3>
 
-    <template v-else>
-        <UiButton @click="resetGame">
-            {{ $t('guess_who.actions.reset') }}
-        </UiButton>
-
-        <div class="grid grid-cols-4 gap-2 md:grid-cols-8 md:gap-4">
-            <GuessWhoCard
-                v-for="card in cards"
-                :key="`theme-${selectedTheme}-card-${card.name}`"
-                v-hide-magic-cursor
-                :card
-                class="cursor-pointer"
-                @click="handleCardClick(card)"
-            />
+            <div class="grid grid-cols-3 gap-4 md:grid-cols-6">
+                <GuessWhoThemeCard
+                    v-for="themeCard in themeCards"
+                    :key="`theme-${themeCard.key}`"
+                    v-hide-magic-cursor
+                    :theme-card
+                    class="cursor-pointer"
+                    @click="selectedTheme = themeCard.key"
+                />
+            </div>
         </div>
-    </template>
+
+        <div v-else>
+            <div class="grid grid-cols-4 gap-2 md:grid-cols-8 md:gap-4">
+                <GuessWhoCard
+                    v-for="card in cards"
+                    :key="`theme-${selectedTheme}-card-${card.name}`"
+                    v-hide-magic-cursor
+                    :card
+                    class="cursor-pointer"
+                    @click="handleCardClick(card)"
+                />
+            </div>
+
+            <div class="mt-4 text-center">
+                <UiButton @click="resetGame">
+                    {{ $t('guess_who.actions.reset') }}
+                </UiButton>
+            </div>
+        </div>
+    </Transition>
 </template>

@@ -23,6 +23,7 @@ export default {
         codeBaseLinkText: 'code base here',
     },
     guess_who: {
+        select_theme: 'Select the theme',
         title: 'Guess who?',
         actions: {
             reset: 'Reset game',
