@@ -23,11 +23,12 @@ export default {
         codeBaseLinkText: 'code base here',
     },
     guess_who: {
-        select_card: 'Select a card to play',
+        lets_play: 'Lets play!',
+        select_card: 'Select your card to play',
         select_theme: 'Select a theme',
         title: 'Guess who?',
         actions: {
-            reset: 'Reset game',
+            confirm_choice: 'Confirm choice',
         },
         themes: [
             {

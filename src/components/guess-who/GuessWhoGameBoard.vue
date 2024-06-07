@@ -10,6 +10,7 @@ const {tm} = useI18n();
 const selectedTheme = ref<string>();
 const cards = ref<GuessWhoCard[]>([]);
 const selectedCard = ref<GuessWhoCard>();
+const selectionConfirmed = ref<boolean>(false);
 
 const themes = tm('guess_who.themes') || [];
 const themeCards: GuessWhoThemeCard[] = themes.map((theme: Record<string, any>) => {
@@ -48,9 +49,20 @@ watch(
     {immediate: true},
 );
 
+function resetBoard() {
+    selectedCard.value = undefined;
+    selectionConfirmed.value = false;
+
+    cards.value.forEach((card) => {
+        card.flipped = false;
+        card.selected = false;
+    });
+}
+
 function resetGame() {
     selectedTheme.value = undefined;
     selectedCard.value = undefined;
+    selectionConfirmed.value = false;
 }
 
 // Handle a card click.
@@ -62,7 +74,13 @@ function handleCardClick(card: GuessWhoCard) {
     }
 
     // If no card has been selected as the user's, save it as the selected card.
-    if (!selectedCard.value) {
+    if (!selectionConfirmed.value) {
+        const oldCard = cards.value.find(c => c.name === selectedCard.value?.name);
+
+        if (oldCard) {
+            oldCard.selected = false;
+        }
+
         selectedCard.value = card;
 
         _card.selected = true;
@@ -72,6 +90,15 @@ function handleCardClick(card: GuessWhoCard) {
 
     // Otherwise, the game is in play and a click should flip the card.
     _card.flipped = !_card.flipped;
+}
+
+function confirmChoice() {
+    // If a card has been selected, confirm the choice.
+    if (!selectedCard.value) {
+        return;
+    }
+
+    selectionConfirmed.value = true;
 }
 </script>
 
@@ -88,7 +115,7 @@ function handleCardClick(card: GuessWhoCard) {
                 {{ $t('guess_who.select_theme') }}
             </h3>
 
-            <div class="grid grid-cols-2 gap-4 md:grid-cols-6">
+            <div class="grid grid-cols-3 gap-4 md:grid-cols-6">
                 <GuessWhoThemeCard
                     v-for="themeCard in themeCards"
                     :key="`theme-${themeCard.key}`"
@@ -104,12 +131,22 @@ function handleCardClick(card: GuessWhoCard) {
             v-else
             class="space-y-4"
         >
-            <h3
-                v-if="!selectedCard"
-                class="text-center"
-            >
-                {{ $t('guess_who.select_card') }}
-            </h3>
+            <div class="flex items-center justify-between">
+                <UiButtonIcon
+                    icon="ph:caret-left"
+                    @click="resetGame"
+                />
+
+                <h3 class="text-center">
+                    {{ $t(selectionConfirmed ? 'guess_who.lets_play' : 'guess_who.select_card') }}
+                </h3>
+
+                <UiButtonIcon
+                    :disabled="!selectedCard"
+                    icon="ph:arrow-counter-clockwise"
+                    @click="resetBoard"
+                />
+            </div>
 
             <div class="grid grid-cols-4 gap-2 md:grid-cols-8 md:gap-4">
                 <GuessWhoCard
@@ -122,9 +159,15 @@ function handleCardClick(card: GuessWhoCard) {
                 />
             </div>
 
-            <div class="text-center">
-                <UiButton @click="resetGame">
-                    {{ $t('guess_who.actions.reset') }}
+            <div
+                v-if="!selectionConfirmed"
+                class="text-center"
+            >
+                <UiButton
+                    :disabled="!selectedCard"
+                    @click="confirmChoice"
+                >
+                    {{ $t('guess_who.actions.confirm_choice') }}
                 </UiButton>
             </div>
         </div>
