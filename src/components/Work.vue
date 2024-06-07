@@ -24,7 +24,7 @@ const workCases = [
                 :class="workCase.backgroundImageClass"
                 class="group relative overflow-hidden rounded-xl bg-center p-4"
             >
-                <div class="absolute inset-0 bg-black opacity-80 transition-opacity group-hover:opacity-80 xl:opacity-0" />
+                <div class="absolute inset-0 bg-black opacity-85 transition-opacity group-hover:opacity-85 xl:opacity-0" />
 
                 <div class="relative transition-opacity group-hover:opacity-100 xl:opacity-0">
                     <div class="mb-4 text-center uppercase">
