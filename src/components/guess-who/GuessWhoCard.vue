@@ -39,7 +39,7 @@ defineProps({
                     size="96"
                 />
 
-                <span>
+                <span class="max-md:text-xs">
                     {{ card.name }}
                 </span>
             </div>
