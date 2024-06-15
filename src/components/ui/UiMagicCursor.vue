@@ -5,17 +5,21 @@ const cursor = ref<HTMLDivElement>();
 const cursorHidden = ref<boolean>(true);
 
 const quickToOptions = {
-    duration: .2,
+    duration: 0.2,
     ease: 'power3',
 };
 
-const showCursor = () => {
+function showCursor() {
     cursorHidden.value = false;
 
     window.removeEventListener('mousemove', showCursor);
-};
+}
 
 onMounted(() => {
+    if (!cursor.value) {
+        return;
+    }
+
     const quickToX = gsap.quickTo(cursor.value, 'x', quickToOptions);
     const quickToY = gsap.quickTo(cursor.value, 'y', quickToOptions);
 
@@ -33,7 +37,7 @@ onMounted(() => {
     <div
         id="magic-cursor"
         ref="cursor"
-        class="pointer-events-none fixed hidden h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white mix-blend-difference transition-opacity duration-300 lg:block"
-        :class="{'opacity-0': cursorHidden}"
+        :class="{ 'opacity-0': cursorHidden }"
+        class="pointer-events-none fixed hidden size-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white mix-blend-difference transition-opacity duration-300 lg:block"
     />
 </template>

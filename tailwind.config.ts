@@ -1,5 +1,4 @@
 import plugin from 'tailwindcss/plugin';
-import type {Config} from 'tailwindcss';
 
 export default {
     theme: {
@@ -9,7 +8,7 @@ export default {
                 'look-right-left': 'look-right-left 2s ease-in-out 1',
                 'walk-left': 'walk-left 2s ease-in-out 1',
                 'walk-right': 'walk-right 2s ease-in-out 1',
-                'wiggle': 'wiggle .5s linear infinite',
+                wiggle: 'wiggle .5s linear infinite',
                 'wiggle-left': 'wiggle-left 2s ease-in-out 1',
                 'wiggle-right': 'wiggle-right 2s ease-in-out 1',
             },
@@ -53,10 +52,52 @@ export default {
         },
     },
     plugins: [
-        plugin(function({matchUtilities, theme}) {
+        plugin(({addBase, matchUtilities, theme}) => {
+            addBase({
+                body: {
+                    fontSize: theme('fontSize.base'),
+                    fontFamily: theme('fontFamily.body'),
+                    lineHeight: 1.5,
+                    fontWeight: theme('fontWeight.regular'),
+                },
+                'h1,.h1': {
+                    fontSize: theme('fontSize.6xl'),
+                    fontFamily: theme('fontFamily.title'),
+                    lineHeight: 1,
+                    fontWeight: theme('fontWeight.semibold'),
+                    textTransform: 'uppercase',
+                    '@screen md': {
+                        fontSize: theme('fontSize.8xl'),
+                    },
+                    '@screen xl': {
+                        fontSize: theme('fontSize.10xl'),
+                    },
+                },
+                'h2,.h2': {
+                    fontSize: theme('fontSize.3xl'),
+                    fontFamily: theme('fontFamily.title'),
+                    lineHeight: 1.125,
+                    fontWeight: theme('fontWeight.semibold'),
+                    textTransform: 'uppercase',
+                    '@screen xl': {
+                        fontSize: theme('fontSize.4xl'),
+                    },
+                },
+                'h3,.h3': {
+                    fontSize: theme('fontSize.2xl'),
+                    fontFamily: theme('fontFamily.title'),
+                    lineHeight: 1.15,
+                    fontWeight: theme('fontWeight.semibold'),
+                    textTransform: 'uppercase',
+                    '@screen xl': {
+                        fontSize: theme('fontSize.3xl'),
+                    },
+                },
+            });
+
             matchUtilities(
                 {
-                    'text-shadow': (value) => ({
+                    'text-shadow': value => ({
                         textShadow: value,
                     }),
                 },
@@ -66,4 +107,4 @@ export default {
             );
         }),
     ],
-} as Config;
+};

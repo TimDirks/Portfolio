@@ -13,8 +13,8 @@
                 <I18nT keypath="footer.body">
                     <template #url>
                         <NuxtLink
-                            class="text-slate-400 hover:underline"
                             :to="$t('footer.codeBaseLink')"
+                            class="text-slate-400 hover:underline"
                             target="_blank"
                             external
                         >

@@ -7,6 +7,10 @@ export default defineNuxtConfig({
             title: 'Tim Dirks',
         },
     },
+    site: {
+        url: process.env.BASE_URL,
+        defaultLocale: 'en',
+    },
     srcDir: 'src/',
     components: [
         '~/components',
@@ -14,12 +18,16 @@ export default defineNuxtConfig({
     modules: [
         '@nuxtjs/tailwindcss',
         '@nuxtjs/i18n',
+        '@nuxtjs/seo',
         'nuxt-icon',
         '@nuxtjs/google-fonts',
         '@nuxt/image',
     ],
     devtools: {
         enabled: true,
+    },
+    experimental: {
+        inlineRouteRules: true,
     },
     css: [
         '~/assets/scss/animations.scss',
