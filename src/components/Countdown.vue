@@ -137,13 +137,16 @@ const countdowns = computed(() => ([
                     {{ $t('countdown.progress_title') }}
                 </h2>
 
-                {{ progressPercentage }}
-
                 <div class="relative h-8 w-full max-w-2xl overflow-hidden rounded-full border border-gray-200 bg-gray-800">
                     <div
                         :style="{ width: progressPercentage }"
-                        class="absolute left-0 h-full bg-amber-500"
+                        class="absolute left-0 h-full opacity-90"
+                        style="background-image: repeating-linear-gradient(45deg, #ffcb28, #ffcb28 1rem, #ffb701 1rem, #ffb701 2rem)"
                     />
+
+                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lg font-bold">
+                        {{ progressPercentage }}
+                    </div>
                 </div>
             </div>
         </div>
