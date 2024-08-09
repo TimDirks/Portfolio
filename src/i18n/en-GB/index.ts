@@ -18,10 +18,10 @@ export default {
         body: 'Eager to see more of me or want to send me a message?',
     },
     countdown: {
-        days: 'day | days',
-        hours: 'hour | hours',
-        minutes: 'minute | minutes',
-        seconds: 'second | seconds',
+        days: 'Day | Days',
+        hours: 'Hour | Hours',
+        minutes: 'Minute | Minutes',
+        seconds: 'Second | Seconds',
         title: 'Time until I can touch your booty',
     },
     footer: {
