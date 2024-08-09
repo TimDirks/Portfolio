@@ -3,7 +3,8 @@ definePageMeta({
     name: 'romy.countdown',
 });
 
-const timeUntilBrisbane = new Date('2024-12-01 16:55 GMT+10:00'); // Brisbane time.
+const timeOfLastKiss = new Date('2024-03-04 05:30 GMT+1:00'); // CET.
+const timeOfNextKiss = new Date('2024-12-01 16:55 GMT+10:00'); // AEST.
 </script>
 
 <template>
@@ -14,22 +15,12 @@ const timeUntilBrisbane = new Date('2024-12-01 16:55 GMT+10:00'); // Brisbane ti
 
         <div class="flex h-full items-center justify-center">
             <Countdown
-                v-slot="countdownParts"
-                :end-date="timeUntilBrisbane"
-                class="grid grid-cols-4 gap-x-8"
-            >
-                <div
-                    v-for="([timeSegment, value]) in Object.entries(countdownParts)"
-                    :key="`countdown-${timeSegment}`"
-                    class="flex flex-col items-center gap-y-2"
-                >
-                    <h3>
-                        {{ value <= 9 ? `0${value}` : value }}
-                    </h3>
-
-                    {{ $t(`countdown.${timeSegment}`, value) }}
-                </div>
-            </Countdown>
+                :end-date="timeOfNextKiss"
+                :end-date-title="$t('countdown.end_date_title')"
+                :start-date="timeOfLastKiss"
+                :start-date-title="$t('countdown.start_date_title')"
+                class="w-full"
+            />
         </div>
     </div>
 </template>

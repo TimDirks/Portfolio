@@ -19,10 +19,13 @@ export default {
     },
     countdown: {
         days: 'Day | Days',
+        end_date_title: 'Time until our next kiss',
         hours: 'Hour | Hours',
         minutes: 'Minute | Minutes',
+        progress_title: 'Progress',
         seconds: 'Second | Seconds',
-        title: 'Time until I can touch your booty',
+        start_date_title: 'Time since our last kiss',
+        title: 'Time between kisses',
     },
     footer: {
         body: 'Curious how I write code? Check out this site\'s {url}',

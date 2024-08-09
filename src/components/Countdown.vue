@@ -4,25 +4,54 @@ const props = defineProps({
         type: Date as PropType<Date>,
         required: true,
     },
+    endDateTitle: String,
     interval: {
         type: Number,
         default: 100,
     },
+    startDate: {
+        type: Date as PropType<Date>,
+        required: true,
+    },
+    startDateTitle: String,
 });
 
-// Get the difference between the end date and now.
-const timeDiff = ref<number>(props.endDate.getTime() - new Date().getTime());
+const {localeProperties} = useI18n();
+
+// Get the difference between the start/end date and now.
+const startDateTimeDiff = ref<number>(new Date().getTime() - props.startDate.getTime());
+const endDateTimeDiff = ref<number>(props.endDate.getTime() - new Date().getTime());
+
+const diffBetweenDates = props.endDate.getTime() - props.startDate.getTime();
+const percentageFormatter = new Intl.NumberFormat(localeProperties.value?.iso, {
+    style: 'percent',
+    minimumFractionDigits: 6,
+});
+
+const progressPercentage = computed(() => {
+    const progress = startDateTimeDiff.value / diffBetweenDates;
+    const progressFraction = Math.min(1, Math.max(0, progress));
+
+    return percentageFormatter.format(progressFraction);
+});
 
 const MILLISECS_PER_SEC = 1000;
 const MILLISECS_PER_MIN = MILLISECS_PER_SEC * 60;
 const MILLISECS_PER_HOUR = MILLISECS_PER_MIN * 60;
 const MILLISECS_PER_DAY = MILLISECS_PER_HOUR * 24;
 
-const formattedTimeDiff = computed(() => ({
-    days: timeDiff.value / MILLISECS_PER_DAY | 0,
-    hours: timeDiff.value % MILLISECS_PER_DAY / MILLISECS_PER_HOUR | 0,
-    minutes: timeDiff.value % MILLISECS_PER_HOUR / MILLISECS_PER_MIN | 0,
-    seconds: timeDiff.value % MILLISECS_PER_MIN / MILLISECS_PER_SEC | 0,
+const startDateCountdown = computed(() => ({
+    days: startDateTimeDiff.value / MILLISECS_PER_DAY | 0,
+    hours: startDateTimeDiff.value % MILLISECS_PER_DAY / MILLISECS_PER_HOUR | 0,
+    minutes: startDateTimeDiff.value % MILLISECS_PER_HOUR / MILLISECS_PER_MIN | 0,
+    seconds: startDateTimeDiff.value % MILLISECS_PER_MIN / MILLISECS_PER_SEC | 0,
+}));
+
+const endDateCountdown = computed(() => ({
+    days: endDateTimeDiff.value / MILLISECS_PER_DAY | 0,
+    hours: endDateTimeDiff.value % MILLISECS_PER_DAY / MILLISECS_PER_HOUR | 0,
+    minutes: endDateTimeDiff.value % MILLISECS_PER_HOUR / MILLISECS_PER_MIN | 0,
+    seconds: endDateTimeDiff.value % MILLISECS_PER_MIN / MILLISECS_PER_SEC | 0,
 }));
 
 const isCountingDown = ref(false);
@@ -46,7 +75,8 @@ function stopCountdown() {
 
 function updateTimeDiff() {
     if (isCountingDown.value) {
-        timeDiff.value = Math.max(0, props.endDate.getTime() - new Date().getTime());
+        startDateTimeDiff.value = Math.max(0, new Date().getTime() - props.startDate.getTime());
+        endDateTimeDiff.value = Math.max(0, props.endDate.getTime() - new Date().getTime());
     }
 }
 
@@ -57,12 +87,65 @@ onMounted(() => {
 onBeforeUnmount(() => {
     stopCountdown();
 });
+
+const countdowns = computed(() => ([
+    {
+        key: 'start-date',
+        title: props.startDateTitle,
+        segments: startDateCountdown.value,
+    },
+    {
+        key: 'end-date',
+        title: props.endDateTitle,
+        segments: endDateCountdown.value,
+    },
+]));
 </script>
 
 <template>
     <ClientOnly>
-        <div v-bind="$attrs">
-            <slot v-bind="formattedTimeDiff" />
+        <div
+            v-bind="$attrs"
+            class="space-y-16"
+        >
+            <div
+                v-for="countdown in countdowns"
+                :key="`countdown-${countdown.key}`"
+                class="flex flex-col items-center gap-y-6"
+            >
+                <h2 v-if="countdown.title">
+                    {{ countdown.title }}
+                </h2>
+
+                <div class="grid grid-cols-4 gap-x-8">
+                    <div
+                        v-for="([timeSegment, value]) in Object.entries(countdown.segments)"
+                        :key="`countdown-${countdown.key}-${timeSegment}`"
+                        class="flex flex-col items-center gap-y-2"
+                    >
+                        <h3>
+                            {{ value <= 9 ? `0${value}` : value }}
+                        </h3>
+
+                        {{ $t(`countdown.${timeSegment}`, value) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center gap-y-6">
+                <h2>
+                    {{ $t('countdown.progress_title') }}
+                </h2>
+
+                {{ progressPercentage }}
+
+                <div class="relative h-8 w-full max-w-2xl overflow-hidden rounded-full border border-gray-200 bg-gray-800">
+                    <div
+                        :style="{ width: progressPercentage }"
+                        class="absolute left-0 h-full bg-amber-500"
+                    />
+                </div>
+            </div>
         </div>
     </ClientOnly>
 </template>
