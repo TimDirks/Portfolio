@@ -60,7 +60,7 @@ export default {
                     lineHeight: 1.5,
                     fontWeight: theme('fontWeight.regular'),
                 },
-                'h1,.h1': {
+                '.h0': {
                     fontSize: theme('fontSize.6xl'),
                     fontFamily: theme('fontFamily.title'),
                     lineHeight: 1,
@@ -71,6 +71,19 @@ export default {
                     },
                     '@screen xl': {
                         fontSize: theme('fontSize.10xl'),
+                    },
+                },
+                'h1,.h1': {
+                    fontSize: theme('fontSize.4xl'),
+                    fontFamily: theme('fontFamily.title'),
+                    lineHeight: 1,
+                    fontWeight: theme('fontWeight.semibold'),
+                    textTransform: 'uppercase',
+                    '@screen md': {
+                        fontSize: theme('fontSize.5xl'),
+                    },
+                    '@screen xl': {
+                        fontSize: theme('fontSize.6xl'),
                     },
                 },
                 'h2,.h2': {

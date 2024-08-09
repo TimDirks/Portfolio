@@ -19,8 +19,8 @@ const props = defineProps({
 const {localeProperties} = useI18n();
 
 // Get the difference between the start/end date and now.
-const startDateTimeDiff = ref<number>(new Date().getTime() - props.startDate.getTime());
-const endDateTimeDiff = ref<number>(props.endDate.getTime() - new Date().getTime());
+const startDateTimeDiff = ref<number>(Math.max(0, new Date().getTime() - props.startDate.getTime()));
+const endDateTimeDiff = ref<number>(Math.max(0, props.endDate.getTime() - new Date().getTime()));
 
 const diffBetweenDates = props.endDate.getTime() - props.startDate.getTime();
 const percentageFormatter = new Intl.NumberFormat(localeProperties.value?.iso, {
@@ -111,13 +111,16 @@ const countdowns = computed(() => ([
             <div
                 v-for="countdown in countdowns"
                 :key="`countdown-${countdown.key}`"
-                class="flex flex-col items-center gap-y-6"
+                class="flex flex-col items-center gap-y-3 md:gap-y-6"
             >
-                <h2 v-if="countdown.title">
+                <h2
+                    v-if="countdown.title"
+                    class="text-center"
+                >
                     {{ countdown.title }}
                 </h2>
 
-                <div class="grid grid-cols-4 gap-x-8">
+                <div class="grid grid-cols-4 gap-x-4 md:gap-x-8">
                     <div
                         v-for="([timeSegment, value]) in Object.entries(countdown.segments)"
                         :key="`countdown-${countdown.key}-${timeSegment}`"
@@ -132,16 +135,20 @@ const countdowns = computed(() => ([
                 </div>
             </div>
 
-            <div class="flex flex-col items-center gap-y-6">
-                <h2>
+            <div class="flex flex-col items-center gap-y-3 md:gap-y-6">
+                <h2 class="text-center">
                     {{ $t('countdown.progress_title') }}
                 </h2>
 
                 <div class="relative h-8 w-full max-w-2xl overflow-hidden rounded-full border border-gray-200 bg-gray-800">
                     <div
-                        :style="{ width: progressPercentage }"
-                        class="absolute left-0 h-full opacity-90"
-                        style="background-image: repeating-linear-gradient(45deg, #ffcb28, #ffcb28 1rem, #ffb701 1rem, #ffb701 2rem)"
+                        :style="{ width: `calc(${progressPercentage} / 2)` }"
+                        class="repeating-linear-gradient absolute left-0 h-full opacity-90"
+                    />
+
+                    <div
+                        :style="{ width: `calc(${progressPercentage} / 2)` }"
+                        class="repeating-linear-gradient flip-gradient animate-moving-gradient absolute right-0 h-full opacity-90"
                     />
 
                     <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lg font-bold">
@@ -152,3 +159,25 @@ const countdowns = computed(() => ([
         </div>
     </ClientOnly>
 </template>
+
+<style lang="scss" scoped>
+.repeating-linear-gradient {
+    --i: 1;
+
+    background-image: repeating-linear-gradient(calc(45deg * var(--i)), #ffcb28, #ffcb28 1rem, #ffb701 1rem, #ffb701 2rem);
+    //animation: moving-gradient 1.5s linear infinite;
+
+    &.flip-gradient {
+        --i: -1;
+    }
+}
+
+@keyframes moving-gradient {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: calc(2rem * var(--i)) 0;
+    }
+}
+</style>
