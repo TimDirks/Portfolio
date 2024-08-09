@@ -17,6 +17,9 @@ export default {
     contact: {
         body: 'Eager to see more of me or want to send me a message?',
     },
+    countdown: {
+        title: 'Time until I can touch your booty',
+    },
     footer: {
         body: 'Curious how I write code? Check out this site\'s {url}',
         codeBaseLink: 'https://github.com/TimDirks/portfolio',
@@ -61,6 +64,13 @@ export default {
         subtitle: 'Software engineer & Front end wizkid',
         title: 'Tim Dirks',
         titlePrefix: 'Hi there, I\'m',
+    },
+    romy: {
+        title: 'All for my favorite person',
+        actions: {
+            to_countdown: 'Countdown',
+            to_guess_who: 'Guess who',
+        },
     },
     socials: {
         actions: {
