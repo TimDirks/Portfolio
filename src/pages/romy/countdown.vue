@@ -2,6 +2,8 @@
 definePageMeta({
     name: 'romy.countdown',
 });
+
+const timeUntilBrisbane = new Date('2024-12-01 16:55 GMT+10:00'); // Brisbane time.
 </script>
 
 <template>
@@ -11,7 +13,23 @@ definePageMeta({
         </h2>
 
         <div class="flex h-full items-center justify-center">
-            Time To Touch Booty
+            <Countdown
+                v-slot="countdownParts"
+                :end-date="timeUntilBrisbane"
+                class="grid grid-cols-4 gap-x-8"
+            >
+                <div
+                    v-for="([timeSegment, value]) in Object.entries(countdownParts)"
+                    :key="`countdown-${timeSegment}`"
+                    class="flex flex-col items-center gap-y-2"
+                >
+                    <h3>
+                        {{ value <= 9 ? `0${value}` : value }}
+                    </h3>
+
+                    {{ $t(`countdown.${timeSegment}`, value) }}
+                </div>
+            </Countdown>
         </div>
     </div>
 </template>
