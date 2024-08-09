@@ -25,7 +25,7 @@ const endDateTimeDiff = ref<number>(props.endDate.getTime() - new Date().getTime
 const diffBetweenDates = props.endDate.getTime() - props.startDate.getTime();
 const percentageFormatter = new Intl.NumberFormat(localeProperties.value?.iso, {
     style: 'percent',
-    minimumFractionDigits: 6,
+    minimumFractionDigits: 2,
 });
 
 const progressPercentage = computed(() => {
