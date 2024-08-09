@@ -6,19 +6,12 @@ const props = defineProps({
     },
     interval: {
         type: Number,
-        default: 1000,
+        default: 100,
     },
 });
 
 // Get the difference between the end date and now.
 const timeDiff = ref<number>(props.endDate.getTime() - new Date().getTime());
-const previousTimeDiff = ref<number>(timeDiff.value);
-
-// Since the updateTimeDiff function won't be called exactly every 1000ms, there is a small margin of time drift (10ms/s).
-// This slowly adds up over time resulting in a delay of a second every ±100 seconds making the formatted time diff
-// seconds value jump by 2 seconds. To prevent this, we keep track of the time drift and subtract it from the delay in
-// the next time progressCountdown gets called.
-const timeDrift = ref<number>(0);
 
 const MILLISECS_PER_SEC = 1000;
 const MILLISECS_PER_MIN = MILLISECS_PER_SEC * 60;
@@ -33,65 +26,27 @@ const formattedTimeDiff = computed(() => ({
 }));
 
 const isCountingDown = ref(false);
-const requestFrameId = ref<number | null>(null);
+const intervalId = ref<NodeJS.Timeout | null>(null);
 
 function startCountdown() {
     isCountingDown.value = true;
 
-    progressCountdown();
+    intervalId.value = setInterval(updateTimeDiff, props.interval);
 }
 
 function stopCountdown() {
     isCountingDown.value = false;
 
-    if (requestFrameId.value) {
-        cancelAnimationFrame(requestFrameId.value);
+    if (intervalId.value) {
+        clearInterval(intervalId.value);
 
-        requestFrameId.value = null;
+        intervalId.value = null;
     }
 }
 
-function progressCountdown() {
-    if (!isCountingDown.value) {
-        return;
-    }
-
-    // TODO: FIX TIME DRIFT!
-    const delay = Math.min(timeDiff.value, (props.interval - timeDrift.value));
-
-    if (delay <= 0) {
-        stopCountdown();
-
-        return;
-    }
-
-    let initialTime: number;
-
-    const step = (now: DOMHighResTimeStamp) => {
-        if (!initialTime) {
-            initialTime = now;
-        }
-
-        const deltaTime = now - initialTime;
-
-        if (deltaTime >= delay) {
-            updateTimeDiff();
-            progressCountdown();
-        } else {
-            requestFrameId.value = requestAnimationFrame(step);
-        }
-    };
-
-    requestFrameId.value = requestAnimationFrame(step);
-}
-const sum = ref(0);
 function updateTimeDiff() {
     if (isCountingDown.value) {
-        previousTimeDiff.value = timeDiff.value;
         timeDiff.value = Math.max(0, props.endDate.getTime() - new Date().getTime());
-
-        sum.value += (previousTimeDiff.value - timeDiff.value - props.interval);
-        timeDrift.value = previousTimeDiff.value - timeDiff.value - props.interval;
     }
 }
 
@@ -108,10 +63,6 @@ onBeforeUnmount(() => {
     <ClientOnly>
         <div v-bind="$attrs">
             <slot v-bind="formattedTimeDiff" />
-        </div>
-
-        <div>
-            {{ previousTimeDiff - timeDiff }} -- {{ sum }} -- {{ timeDrift }}
         </div>
     </ClientOnly>
 </template>
