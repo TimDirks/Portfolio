@@ -166,14 +166,14 @@ const countdowns = computed(() => ([
 
 <style lang="scss" scoped>
 .repeating-linear-gradient {
-    background-image: repeating-linear-gradient(-45deg, #ffcb28, #ffcb28 1rem, #ffb701 1rem, #ffb701 2rem);
-    background-size: 200% 200%;
+    background-image: repeating-linear-gradient(-45deg, #ffcb28, #ffcb28 25%, #ffb701 25%, #ffb701 50%, #ffcb28 50%, #ffcb28 75%, #ffb701 75%, #ffb701);
+    background-size: 2rem 2rem;
     animation: moving-gradient 4s linear infinite;
 }
 
 @keyframes moving-gradient {
     100% {
-        background-position: 100% 100%;
+        background-position: 4rem 2rem;
     }
 }
 </style>
