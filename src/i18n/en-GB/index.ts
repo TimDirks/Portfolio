@@ -75,7 +75,7 @@ export default {
     romy: {
         title: 'All for my favorite person',
         actions: {
-            to_countdown: 'Countdown',
+            to_countdown: 'Kiss timer',
             to_guess_who: 'Guess who',
         },
     },
