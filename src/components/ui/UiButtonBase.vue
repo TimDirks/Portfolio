@@ -14,13 +14,15 @@ const component = computed(() => {
         ? resolveComponent('NuxtLink')
         : props.tag;
 });
+
+const localePath = useLocalePath();
 </script>
 
 <template>
     <component
         :is="component"
         v-hide-magic-cursor
-        :to
+        :to="to && localePath(to)"
         class="
             before:-skew-x-45 before:transition-placement
             relative isolate overflow-hidden rounded-full border border-slate-800 text-white
