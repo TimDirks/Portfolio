@@ -143,13 +143,17 @@ const countdowns = computed(() => ([
                 <div class="relative h-8 w-full max-w-2xl overflow-hidden rounded-full border border-gray-200 bg-gray-800">
                     <div
                         :style="{ width: `calc(${progressPercentage} / 2)` }"
-                        class="repeating-linear-gradient absolute left-0 h-full opacity-90"
-                    />
+                        class="absolute left-0 h-full"
+                    >
+                        <div class="repeating-linear-gradient size-full opacity-90" />
+                    </div>
 
                     <div
                         :style="{ width: `calc(${progressPercentage} / 2)` }"
-                        class="repeating-linear-gradient flip-gradient animate-moving-gradient absolute right-0 h-full opacity-90"
-                    />
+                        class="absolute right-0 h-full"
+                    >
+                        <div class="repeating-linear-gradient size-full -scale-x-100 opacity-90" />
+                    </div>
 
                     <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lg font-bold">
                         {{ progressPercentage }}
@@ -162,22 +166,14 @@ const countdowns = computed(() => ([
 
 <style lang="scss" scoped>
 .repeating-linear-gradient {
-    --i: 1;
-
-    background-image: repeating-linear-gradient(calc(45deg * var(--i)), #ffcb28, #ffcb28 1rem, #ffb701 1rem, #ffb701 2rem);
-    //animation: moving-gradient 1.5s linear infinite;
-
-    &.flip-gradient {
-        --i: -1;
-    }
+    background-image: repeating-linear-gradient(-45deg, #ffcb28, #ffcb28 1rem, #ffb701 1rem, #ffb701 2rem);
+    background-size: 200% 200%;
+    animation: moving-gradient 4s linear infinite;
 }
 
 @keyframes moving-gradient {
-    0% {
-        background-position: 0 0;
-    }
     100% {
-        background-position: calc(2rem * var(--i)) 0;
+        background-position: 100% 100%;
     }
 }
 </style>
