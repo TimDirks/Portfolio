@@ -17,6 +17,16 @@ export default {
     contact: {
         body: 'Eager to see more of me or want to send me a message?',
     },
+    countdown: {
+        days: 'Day | Days',
+        end_date_title: 'Time until our next kiss',
+        hours: 'Hour | Hours',
+        minutes: 'Minute | Minutes',
+        progress_title: 'Progress',
+        seconds: 'Second | Seconds',
+        start_date_title: 'Time since our last kiss',
+        title: 'Time between kisses',
+    },
     footer: {
         body: 'Curious how I write code? Check out this site\'s {url}',
         codeBaseLink: 'https://github.com/TimDirks/portfolio',
@@ -61,6 +71,13 @@ export default {
         subtitle: 'Software engineer & Front end wizkid',
         title: 'Tim Dirks',
         titlePrefix: 'Hi there, I\'m',
+    },
+    romy: {
+        title: 'For the best girlfriend ever <3',
+        actions: {
+            to_countdown: 'Kiss timer',
+            to_guess_who: 'Guess who',
+        },
     },
     socials: {
         actions: {
