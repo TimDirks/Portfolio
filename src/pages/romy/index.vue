@@ -10,13 +10,13 @@ definePageMeta({
             {{ $t('romy.title') }}
         </h1>
 
-        <div class="flex h-full items-center justify-center gap-x-4">
-            <UiButton :to="{ name: 'romy.countdown' }">
-                {{ $t('romy.actions.to_countdown') }}
-            </UiButton>
-
+        <div class="flex h-full flex-col items-center justify-center gap-4">
             <UiButton :to="{ name: 'romy.guess-who' }">
                 {{ $t('romy.actions.to_guess_who') }}
+            </UiButton>
+
+            <UiButton :to="{ name: 'romy.countdown' }">
+                {{ $t('romy.actions.to_countdown') }}
             </UiButton>
         </div>
     </div>

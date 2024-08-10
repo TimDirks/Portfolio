@@ -73,7 +73,7 @@ export default {
         titlePrefix: 'Hi there, I\'m',
     },
     romy: {
-        title: 'All for my favorite person',
+        title: 'For the best girlfriend ever <3',
         actions: {
             to_countdown: 'Kiss timer',
             to_guess_who: 'Guess who',
