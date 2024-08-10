@@ -9,9 +9,17 @@ const timeOfNextKiss = new Date('2024-12-01 16:55 GMT+10:00'); // AEST.
 
 <template>
     <div class="container mx-auto my-4 flex grow flex-col px-4 md:my-16">
-        <h1 class="mb-4 text-center">
-            {{ $t('countdown.title') }}
-        </h1>
+        <div class="relative mb-4 px-12">
+            <UiButtonIcon
+                :to="{ name: 'romy.index' }"
+                class="!absolute left-0 top-1/2 shrink-0 -translate-y-1/2"
+                icon="ph:caret-left"
+            />
+
+            <h1 class="text-center">
+                {{ $t('countdown.title') }}
+            </h1>
+        </div>
 
         <div class="flex h-full items-center justify-center">
             <Countdown
