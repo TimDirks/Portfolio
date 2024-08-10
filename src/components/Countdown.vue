@@ -143,17 +143,13 @@ const countdowns = computed(() => ([
                 <div class="relative h-8 w-full max-w-2xl overflow-hidden rounded-full border border-gray-200 bg-gray-800">
                     <div
                         :style="{ width: `calc(${progressPercentage} / 2)` }"
-                        class="absolute left-0 h-full"
-                    >
-                        <div class="repeating-linear-gradient size-full opacity-90" />
-                    </div>
+                        class="repeating-linear-gradient absolute left-0 size-full h-full opacity-90"
+                    />
 
                     <div
                         :style="{ width: `calc(${progressPercentage} / 2)` }"
-                        class="absolute right-0 h-full"
-                    >
-                        <div class="repeating-linear-gradient size-full -scale-x-100 opacity-90" />
-                    </div>
+                        class="repeating-linear-gradient absolute right-0 size-full h-full -scale-x-100 opacity-90"
+                    />
 
                     <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lg font-bold">
                         {{ progressPercentage }}
