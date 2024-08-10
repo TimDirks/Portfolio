@@ -14,9 +14,9 @@
     "dependencies": {
         "defu": "^6.1.4",
         "gsap": "^3.12.2",
-        "nuxt": "^3.10.2",
+        "nuxt": "^3.12.3",
         "sharp": "0.32.6",
-        "vue": "^3.4.20",
+        "vue": "^3.4.31",
         "vue-router": "latest"
     },
     "devDependencies": {
@@ -29,9 +29,9 @@
         "@nuxtjs/tailwindcss": "^6.11.4",
         "@types/node": "^20.11.19",
         "eslint": "8.57.0",
-        "eslint-plugin-tailwindcss": "^3.13.0",
+        "eslint-plugin-tailwindcss": "^3.17.4",
         "nuxt-icon": "^0.6.8",
-        "sass": "^1.71.0",
+        "sass": "^1.77.6",
         "typescript": "^5.3.3"
     }
 }

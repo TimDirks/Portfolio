@@ -24,7 +24,7 @@ onMounted(() => {
                         {{ $t('introduction.titlePrefix') }}
                     </p>
 
-                    <h1 class="shadow-black/30 text-shadow">
+                    <h1 class="h0 text-shadow shadow-black/30">
                         {{ $t('introduction.title') }}
                     </h1>
                 </div>
@@ -33,14 +33,14 @@ onMounted(() => {
             <div class="overflow-hidden pb-2">
                 <div
                     :class="{ '-translate-y-full': hideIntro }"
-                    class="pb-2 text-center transition-transform delay-900 duration-1000"
+                    class="delay-900 pb-2 text-center transition-transform duration-1000"
                 >
                     <p class="xl:text-xl">
                         {{ $t('introduction.subtitle') }}
                     </p>
 
                     <NuxtImg
-                        class="mt-4 inline-block w-24 hover:animate-wiggle md:w-40"
+                        class="hover:animate-wiggle mt-4 inline-block w-24 md:w-40"
                         src="/img/sprite-tim-head.png"
                     />
                 </div>
@@ -49,7 +49,7 @@ onMounted(() => {
 
         <UiButtonIcon
             :class="{ 'opacity-0': hideIntro }"
-            class="!absolute bottom-1/8 animate-bounce transition-opacity delay-1500 duration-1000"
+            class="bottom-1/8 delay-1500 !absolute animate-bounce transition-opacity duration-1000"
             icon="ph:caret-down"
             @click="emit('scrollDown')"
         />
