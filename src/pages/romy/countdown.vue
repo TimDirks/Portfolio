@@ -3,8 +3,8 @@ definePageMeta({
     name: 'romy.countdown',
 });
 
-const timeOfLastKiss = new Date('2024-03-04 05:30 GMT+1:00'); // CET.
-const timeOfNextKiss = new Date('2024-12-01 16:55 GMT+10:00'); // AEST.
+const timeOfLastKiss = new Date('Mon, 04 Mar 2024 04:30:00 GMT'); // 05:30 in CET.
+const timeOfNextKiss = new Date('Sun, 01 Dec 2024 06:55:00 GMT'); // 16:55 in AEST.
 </script>
 
 <template>
