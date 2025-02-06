@@ -1,7 +1,21 @@
 <script lang="ts" setup>
+import type {Drawing} from '@/components/garden/GardenCanvas.vue';
+
 definePageMeta({
     name: 'romy.garden',
 });
+
+const CANVAS_SIZE = 200;
+
+const petalDrawing = ref<Drawing | null>(null);
+
+function createFlower(drawing: Drawing) {
+    if (!drawing.path) {
+        return;
+    }
+
+    petalDrawing.value = drawing;
+}
 </script>
 
 <template>
@@ -18,8 +32,36 @@ definePageMeta({
             </h1>
         </div>
 
-        <div class="flex h-full items-center justify-center">
-            <GardenCanvas />
+        <div class="flex h-full flex-col items-center justify-center gap-8">
+            <GardenCanvas
+                :canvas-size="CANVAS_SIZE"
+                @artwork-created="createFlower"
+            />
+
+            <div class="min-h-[400px] w-full bg-lime-400">
+                <svg
+                    :height="CANVAS_SIZE"
+                    :viewBox="`0 0 ${CANVAS_SIZE * 2} ${CANVAS_SIZE * 2}`"
+                    :width="CANVAS_SIZE"
+                >
+                    <template v-if="petalDrawing">
+                        <path
+                            :d="petalDrawing.path"
+                            :fill="petalDrawing.color"
+                            stroke="black"
+                            stroke-linejoin="bevel"
+                            stroke-width="2"
+                        />
+
+                        <circle
+                            :cx="CANVAS_SIZE"
+                            :cy="CANVAS_SIZE"
+                            fill="blue"
+                            r="20"
+                        />
+                    </template>
+                </svg>
+            </div>
         </div>
     </div>
 </template>

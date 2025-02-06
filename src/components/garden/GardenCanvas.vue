@@ -4,22 +4,31 @@ interface Point {
     y: number;
 }
 
+export interface Drawing {
+    path: string;
+    color: string;
+}
+
 const props = defineProps({
+    canvasSize: {
+        type: Number,
+        default: 200,
+    },
     color: {
         type: String,
         default: '#c0392b',
     },
-    size: {
-        type: Number,
-        default: 200,
-    },
 });
+
+const emit = defineEmits<{
+    (event: 'artworkCreated', drawing: Drawing): void;
+}>();
 
 const canvas = ref<HTMLCanvasElement>();
 const context = ref<CanvasRenderingContext2D | null>();
 const canvasBounds = ref<DOMRect | null>(null);
-const drawStrokes: Array<Array<Point>> = [[]];
 
+const drawStrokes: Array<Array<Point>> = [[]];
 const cursorPosition: Point = {x: 0, y: 0};
 
 function drawLine(ev: MouseEvent) {
@@ -145,6 +154,72 @@ function startNewStroke(ev: MouseEvent) {
     drawStrokes[drawStrokes.length - 1][0] = {...cursorPosition};
 }
 
+function clearCanvas() {
+    if (!context.value) {
+        return;
+    }
+
+    // Clear the canvas.
+    context.value.clearRect(0, 0, props.canvasSize, props.canvasSize);
+
+    // Clear the saved draw strokes.
+    drawStrokes.splice(0, drawStrokes.length);
+
+    // Reset the cursor position.
+    cursorPosition.x = 0;
+    cursorPosition.y = 0;
+}
+
+function convertStrokesToPath() {
+    // Check if there are paths to convert by checking if there are
+    // strokes with more than 1 coordinate saved.
+    if (!drawStrokes.some(stroke => stroke.length > 1)) {
+        return;
+    }
+
+    // Map the draw strokes by transforming them to SVG path instructions and then
+    // mirroring them along the X, Y, and X and Y axis to create symmetry.
+    const strokes = drawStrokes
+        .filter(stroke => stroke.length > 1)
+        .map((stroke) => {
+            // To create a continuous line, every other path needs to draw the lines in
+            // reverse order. This is so that the second line will continue where the first
+            // line ended instead of it jumping to the original start on the mirrored side.
+            const [start, ...points] = stroke;
+            const [end, ...revPoints] = stroke.toReversed();
+
+            // TODO: Check which way the line is drawn in to figure out in which order to mirror the paths.
+
+            return [
+                // Normal path as drawn on canvas.
+                `M${start.x} ${start.y}`,
+                ...points.map(({x, y}) => `L${x} ${y}`),
+                // Path mirrored along the Y axis.
+                `L${props.canvasSize * 2 - end.x} ${end.y}`,
+                ...revPoints.map(({x, y}) => `L${props.canvasSize * 2 - x} ${y}`),
+                // Path mirrored along both the X and Y axis.
+                `L${props.canvasSize * 2 - start.x} ${props.canvasSize * 2 - start.y}`,
+                ...points.map(({x, y}) => `L${props.canvasSize * 2 - x} ${props.canvasSize * 2 - y}`),
+                // Path mirrored along the X axis.
+                `L${end.x} ${props.canvasSize * 2 - end.y}`,
+                ...revPoints.map(({x, y}) => `L${x} ${props.canvasSize * 2 - y}`),
+                'Z',
+            ].join('');
+        });
+
+    return strokes.join(' ');
+}
+
+function exportArtwork() {
+    const path = convertStrokesToPath();
+
+    if (!path) {
+        return;
+    }
+
+    emit('artworkCreated', {path, color: props.color});
+}
+
 onMounted(() => {
     if (!canvas.value) {
         return;
@@ -156,14 +231,28 @@ onMounted(() => {
 </script>
 
 <template>
-    <canvas
-        ref="canvas"
-        v-hide-magic-cursor
-        :height="size"
-        :width="size"
-        class="cursor-default bg-white"
-        @mousedown="startNewStroke"
-        @mouseenter="startNewStroke"
-        @mousemove="drawLine"
-    />
+    <div class="flex items-center gap-8">
+        <canvas
+            ref="canvas"
+            v-hide-magic-cursor
+            :height="canvasSize"
+            :width="canvasSize"
+            class="cursor-default bg-white"
+            @mousedown="startNewStroke"
+            @mouseenter="startNewStroke"
+            @mousemove="drawLine"
+        />
+
+        <div class="flex flex-col gap-4">
+            <UiButton
+                :label="$t('garden.actions.clear')"
+                @click="clearCanvas"
+            />
+
+            <UiButton
+                :label="$t('garden.actions.plant')"
+                @click="exportArtwork"
+            />
+        </div>
+    </div>
 </template>

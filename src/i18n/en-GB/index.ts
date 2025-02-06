@@ -34,6 +34,10 @@ export default {
     },
     garden: {
         title: 'Our garden',
+        actions: {
+            clear: 'Clear',
+            plant: 'Plant',
+        },
     },
     guess_who: {
         lets_play: 'Lets play!',
