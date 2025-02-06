@@ -1,14 +1,4 @@
 <script setup lang="ts">
-interface Point {
-    x: number;
-    y: number;
-}
-
-export interface Drawing {
-    path: string;
-    color: string;
-}
-
 const props = defineProps({
     canvasSize: {
         type: Number,
@@ -19,6 +9,16 @@ const props = defineProps({
 const emit = defineEmits<{
     (event: 'artworkCreated', drawing: Drawing): void;
 }>();
+
+interface Point {
+    x: number;
+    y: number;
+}
+
+export interface Drawing {
+    path: string;
+    color: string;
+}
 
 const AVAILABLE_COLORS = [
     '#ff7e00',
@@ -46,13 +46,39 @@ const cursorPosition: Point = {x: 0, y: 0};
 // Determine if a drawing has been started by checking if there are strokes with more than 1 point.
 const hasDrawing = computed(() => drawStrokes.value.some(stroke => stroke.length > 1));
 
-function drawLine(ev: MouseEvent) {
-    if (!context.value || !canvasBounds.value) {
+function drawMouseLine(ev: MouseEvent) {
+    // Mouse left button must be pressed
+    if (ev.buttons !== 1) {
         return;
     }
 
-    // Mouse left button must be pressed
-    if (ev.buttons !== 1) {
+    drawLine({x: ev.clientX, y: ev.clientY});
+}
+
+function drawTouchLine(ev: TouchEvent) {
+    if (!canvasBounds.value) {
+        return;
+    }
+
+    ev.preventDefault();
+
+    const {clientX: x, clientY: y} = ev.touches[0];
+
+    // Touch move events keep triggering when the touch event gets dragged outside the target element.
+    // To prevent out of bounds drawing, we check whether the touch event is within canvas bounds.
+    if (
+        (x - canvasBounds.value.left) < 0 || (x - canvasBounds.value.left) > props.canvasSize
+        || (y - canvasBounds.value.top) < 0 || (y - canvasBounds.value.top) > props.canvasSize
+    ) {
+        return;
+    }
+
+    drawLine({x, y});
+}
+
+// Point argument has coordinates relative to the view port, not relative to the canvas
+function drawLine(pointerPoint: Point) {
+    if (!context.value || !canvasBounds.value) {
         return;
     }
 
@@ -66,7 +92,7 @@ function drawLine(ev: MouseEvent) {
     context.value.moveTo(cursorPosition.x, cursorPosition.y);
 
     // Update the position.
-    updatePosition(ev);
+    updatePosition(pointerPoint);
 
     // Set the end position of the stroke segment.
     context.value.lineTo(cursorPosition.x, cursorPosition.y);
@@ -75,11 +101,12 @@ function drawLine(ev: MouseEvent) {
     context.value.stroke();
 }
 
-// Update cursor position from mouse event
-function updatePosition(ev: MouseEvent) {
-    // Set the cursor position by the mouse coordinates offset by the canvas bounds.
-    cursorPosition.x = ev.clientX - canvasBounds.value!.left;
-    cursorPosition.y = ev.clientY - canvasBounds.value!.top;
+// Update cursor position from pointer point.
+// Point argument has coordinates relative to the view port, not relative to the canvas
+function updatePosition(pointerPoint: Point) {
+    // Set the cursor position by the point coordinates offset by the canvas bounds.
+    cursorPosition.x = pointerPoint.x - canvasBounds.value!.left;
+    cursorPosition.y = pointerPoint.y - canvasBounds.value!.top;
 
     // Get the latest (and thus current) stroke.
     const currentStroke = drawStrokes.value[drawStrokes.value.length - 1];
@@ -149,15 +176,25 @@ function checkIfPointOnLine(start: Point, end: Point, point: Point) {
     return Math.abs(calculatedY - point.y) <= 0.1;
 }
 
-// Start a new stroke.
-function startNewStroke(ev: MouseEvent) {
+function startNewMouseStroke(ev: MouseEvent) {
+    startNewStroke({x: ev.clientX, y: ev.clientY});
+}
+
+function startNewTouchStroke(ev: TouchEvent) {
+    const touch = ev.touches[0];
+
+    startNewStroke({x: touch.clientX, y: touch.clientY});
+}
+
+// Point argument has coordinates relative to the view port, not relative to the canvas
+function startNewStroke(pointerPoint: Point) {
     if (!canvasBounds.value) {
         return;
     }
 
-    // Set the cursor position by the mouse coordinates offset by the canvas bounds.
-    cursorPosition.x = ev.clientX - canvasBounds.value.left;
-    cursorPosition.y = ev.clientY - canvasBounds.value.top;
+    // Set the cursor position by the point coordinates offset by the canvas bounds.
+    cursorPosition.x = pointerPoint.x - canvasBounds.value.left;
+    cursorPosition.y = pointerPoint.y - canvasBounds.value.top;
 
     // If the last item from the draw stroke array has more than 1 entry, add a new array
     // to store coordinates for the new stroke.
@@ -300,9 +337,11 @@ onMounted(() => {
                 :height="canvasSize"
                 :width="canvasSize"
                 class="cursor-default bg-white"
-                @mousedown="startNewStroke"
-                @mouseenter="startNewStroke"
-                @mousemove="drawLine"
+                @mousedown="startNewMouseStroke"
+                @mouseenter="startNewMouseStroke"
+                @mousemove="drawMouseLine"
+                @touchmove="drawTouchLine"
+                @touchstart="startNewTouchStroke"
             />
         </div>
 
