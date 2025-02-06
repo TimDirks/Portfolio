@@ -19,7 +19,7 @@ const props = defineProps({
 const {localeProperties} = useI18n();
 
 // Get the difference between the start/end date and now.
-const startDateTimeDiff = ref<number>(Math.max(0, new Date().getTime() - props.startDate.getTime()));
+const startDateTimeDiff = ref<number>(Math.max(0, Math.min(new Date().getTime(), props.endDate.getTime()) - props.startDate.getTime()));
 const endDateTimeDiff = ref<number>(Math.max(0, props.endDate.getTime() - new Date().getTime()));
 
 const diffBetweenDates = props.endDate.getTime() - props.startDate.getTime();
@@ -75,7 +75,7 @@ function stopCountdown() {
 
 function updateTimeDiff() {
     if (isCountingDown.value) {
-        startDateTimeDiff.value = Math.max(0, new Date().getTime() - props.startDate.getTime());
+        startDateTimeDiff.value = Math.max(0, Math.min(new Date().getTime(), props.endDate.getTime()) - props.startDate.getTime());
         endDateTimeDiff.value = Math.max(0, props.endDate.getTime() - new Date().getTime());
     }
 }
