@@ -18,6 +18,10 @@ definePageMeta({
             <UiButton :to="{ name: 'romy.countdown' }">
                 {{ $t('romy.actions.to_countdown') }}
             </UiButton>
+
+            <UiButton :to="{ name: 'romy.garden' }">
+                {{ $t('romy.actions.to_garden') }}
+            </UiButton>
         </div>
     </div>
 </template>

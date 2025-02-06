@@ -32,6 +32,9 @@ export default {
         codeBaseLink: 'https://github.com/TimDirks/portfolio',
         codeBaseLinkText: 'code base here',
     },
+    garden: {
+        title: 'Our garden',
+    },
     guess_who: {
         lets_play: 'Lets play!',
         select_card: 'Select your card to play',
@@ -76,6 +79,7 @@ export default {
         title: 'For the best girlfriend ever <3',
         actions: {
             to_countdown: 'Kiss timer',
+            to_garden: 'Our garden',
             to_guess_who: 'Guess who',
         },
     },
