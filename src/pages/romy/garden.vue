@@ -19,7 +19,7 @@ definePageMeta({
         </div>
 
         <div class="flex h-full items-center justify-center">
-            Garden time!
+            <GardenCanvas />
         </div>
     </div>
 </template>
