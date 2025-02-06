@@ -188,23 +188,43 @@ function convertStrokesToPath() {
             const [start, ...points] = stroke;
             const [end, ...revPoints] = stroke.toReversed();
 
-            // TODO: Check which way the line is drawn in to figure out in which order to mirror the paths.
-
-            return [
-                // Normal path as drawn on canvas.
+            const topLeftPath = [
+                // Normal path as drawn on canvas. Will always be the first path.
                 `M${start.x} ${start.y}`,
                 ...points.map(({x, y}) => `L${x} ${y}`),
-                // Path mirrored along the Y axis.
+            ];
+
+            const topRightPath = [
+                // Path mirrored along the Y axis. Will be either second or last path.
                 `L${props.canvasSize * 2 - end.x} ${end.y}`,
                 ...revPoints.map(({x, y}) => `L${props.canvasSize * 2 - x} ${y}`),
-                // Path mirrored along both the X and Y axis.
-                `L${props.canvasSize * 2 - start.x} ${props.canvasSize * 2 - start.y}`,
-                ...points.map(({x, y}) => `L${props.canvasSize * 2 - x} ${props.canvasSize * 2 - y}`),
-                // Path mirrored along the X axis.
+            ];
+
+            const bottomLeftPath = [
+                // Path mirrored along the X axis. Will be either second or last path.
                 `L${end.x} ${props.canvasSize * 2 - end.y}`,
                 ...revPoints.map(({x, y}) => `L${x} ${props.canvasSize * 2 - y}`),
+            ];
+
+            const bottomRightPath = [
+                // Path mirrored along both the X and Y axis. Will always be the third path.
+                `L${props.canvasSize * 2 - start.x} ${props.canvasSize * 2 - start.y}`,
+                ...points.map(({x, y}) => `L${props.canvasSize * 2 - x} ${props.canvasSize * 2 - y}`),
+            ];
+
+            // We check if the line was ended closer to the X or Y axis to determine which
+            // way to order the top right and bottom left paths.
+            const continueAlongX = end.x >= end.y;
+
+            return [
+                topLeftPath,
+                continueAlongX ? topRightPath : bottomLeftPath,
+                bottomRightPath,
+                continueAlongX ? bottomLeftPath : topRightPath,
                 'Z',
-            ].join('');
+            ]
+                .flat()
+                .join('');
         });
 
     return strokes.join(' ');
