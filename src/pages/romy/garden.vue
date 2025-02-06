@@ -50,7 +50,7 @@ function createFlower(drawing: Drawing) {
                             :fill="petalDrawing.color"
                             stroke="black"
                             stroke-linejoin="bevel"
-                            stroke-width="2"
+                            stroke-width="5"
                         />
 
                         <circle

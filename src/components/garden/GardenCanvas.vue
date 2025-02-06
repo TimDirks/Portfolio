@@ -14,22 +14,37 @@ const props = defineProps({
         type: Number,
         default: 200,
     },
-    color: {
-        type: String,
-        default: '#c0392b',
-    },
 });
 
 const emit = defineEmits<{
     (event: 'artworkCreated', drawing: Drawing): void;
 }>();
 
+const AVAILABLE_COLORS = [
+    '#ff7e00',
+    '#00b7ef',
+    '#990030',
+    '#a8e61d',
+    '#6f3198',
+    '#ff2994',
+    '#d3f9bc',
+    '#ed1c24',
+    '#22b14c',
+    '#ffa3b1',
+    '#fff200',
+    '#2f3699',
+];
+
 const canvas = ref<HTMLCanvasElement>();
 const context = ref<CanvasRenderingContext2D | null>();
 const canvasBounds = ref<DOMRect | null>(null);
+const curColor = ref<string>(AVAILABLE_COLORS[0]);
+const drawStrokes = ref<Array<Array<Point>>>([[]]);
 
-const drawStrokes: Array<Array<Point>> = [[]];
 const cursorPosition: Point = {x: 0, y: 0};
+
+// Determine if a drawing has been started by checking if there are strokes with more than 1 point.
+const hasDrawing = computed(() => drawStrokes.value.some(stroke => stroke.length > 1));
 
 function drawLine(ev: MouseEvent) {
     if (!context.value || !canvasBounds.value) {
@@ -45,7 +60,7 @@ function drawLine(ev: MouseEvent) {
 
     context.value.lineWidth = 5;
     context.value.lineCap = 'round';
-    context.value.strokeStyle = props.color;
+    context.value.strokeStyle = curColor.value;
 
     // Set the start position of the stroke segment.
     context.value.moveTo(cursorPosition.x, cursorPosition.y);
@@ -67,7 +82,7 @@ function updatePosition(ev: MouseEvent) {
     cursorPosition.y = ev.clientY - canvasBounds.value!.top;
 
     // Get the latest (and thus current) stroke.
-    const currentStroke = drawStrokes[drawStrokes.length - 1];
+    const currentStroke = drawStrokes.value[drawStrokes.value.length - 1];
 
     // If the current stroke only has the start position, add the new position.
     if (currentStroke.length <= 1) {
@@ -146,12 +161,21 @@ function startNewStroke(ev: MouseEvent) {
 
     // If the last item from the draw stroke array has more than 1 entry, add a new array
     // to store coordinates for the new stroke.
-    if (!drawStrokes[drawStrokes.length - 1] || drawStrokes[drawStrokes.length - 1].length > 1) {
-        drawStrokes.push([]);
+    if (!drawStrokes.value[drawStrokes.value.length - 1] || drawStrokes.value[drawStrokes.value.length - 1].length > 1) {
+        drawStrokes.value.push([]);
     }
 
     // Set or update the first entry to the newest start coordinates.
-    drawStrokes[drawStrokes.length - 1][0] = {...cursorPosition};
+    drawStrokes.value[drawStrokes.value.length - 1][0] = {...cursorPosition};
+}
+
+function selectColor(color: string) {
+    // Don't allow color changes when a drawing has already been started.
+    if (hasDrawing.value) {
+        return;
+    }
+
+    curColor.value = color;
 }
 
 function clearCanvas() {
@@ -163,7 +187,7 @@ function clearCanvas() {
     context.value.clearRect(0, 0, props.canvasSize, props.canvasSize);
 
     // Clear the saved draw strokes.
-    drawStrokes.splice(0, drawStrokes.length);
+    drawStrokes.value.splice(0, drawStrokes.value.length);
 
     // Reset the cursor position.
     cursorPosition.x = 0;
@@ -173,13 +197,13 @@ function clearCanvas() {
 function convertStrokesToPath() {
     // Check if there are paths to convert by checking if there are
     // strokes with more than 1 coordinate saved.
-    if (!drawStrokes.some(stroke => stroke.length > 1)) {
+    if (!hasDrawing.value) {
         return;
     }
 
     // Map the draw strokes by transforming them to SVG path instructions and then
     // mirroring them along the X, Y, and X and Y axis to create symmetry.
-    const strokes = drawStrokes
+    const strokes = drawStrokes.value
         .filter(stroke => stroke.length > 1)
         .map((stroke) => {
             // To create a continuous line, every other path needs to draw the lines in
@@ -237,7 +261,7 @@ function exportArtwork() {
         return;
     }
 
-    emit('artworkCreated', {path, color: props.color});
+    emit('artworkCreated', {path, color: curColor.value});
 }
 
 onMounted(() => {
@@ -252,16 +276,35 @@ onMounted(() => {
 
 <template>
     <div class="flex items-center gap-8">
-        <canvas
-            ref="canvas"
-            v-hide-magic-cursor
-            :height="canvasSize"
-            :width="canvasSize"
-            class="cursor-default bg-white"
-            @mousedown="startNewStroke"
-            @mouseenter="startNewStroke"
-            @mousemove="drawLine"
-        />
+        <div class="flex items-center gap-2">
+            <div
+                v-hide-magic-cursor
+                class="grid cursor-default grid-cols-2 gap-1"
+            >
+                <div
+                    v-for="color in AVAILABLE_COLORS"
+                    :key="`canvas-color-${color}`"
+                    :class="[
+                        color === curColor ? 'border-white' : 'border-transparent',
+                        hasDrawing ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
+                    ]"
+                    :style="`background-color: ${color};`"
+                    class="size-6 border-2 transition"
+                    @click="selectColor(color)"
+                />
+            </div>
+
+            <canvas
+                ref="canvas"
+                v-hide-magic-cursor
+                :height="canvasSize"
+                :width="canvasSize"
+                class="cursor-default bg-white"
+                @mousedown="startNewStroke"
+                @mouseenter="startNewStroke"
+                @mousemove="drawLine"
+            />
+        </div>
 
         <div class="flex flex-col gap-4">
             <UiButton
