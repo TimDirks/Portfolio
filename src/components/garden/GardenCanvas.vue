@@ -313,6 +313,9 @@ function exportArtwork() {
     }
 
     emit('artworkCreated', {path, color: curColor.value});
+
+    // After exporting the artwork, clear the canvas.
+    clearCanvas();
 }
 
 onMounted(() => {

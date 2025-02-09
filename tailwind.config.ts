@@ -7,6 +7,7 @@ export default {
             animation: {
                 'look-left-right': 'look-left-right 2s ease-in-out 1',
                 'look-right-left': 'look-right-left 2s ease-in-out 1',
+                sway: 'sway 8s infinite',
                 'walk-left': 'walk-left 2s ease-in-out 1',
                 'walk-right': 'walk-right 2s ease-in-out 1',
                 wiggle: 'wiggle .5s linear infinite',

@@ -52,7 +52,7 @@ function createFlower(drawing: Drawing) {
                 @artwork-created="createFlower"
             />
 
-            <div class="min-h-[400px] w-full bg-lime-400">
+            <div class="flex min-h-[400px] w-full flex-wrap bg-lime-400">
                 <GardenFlower
                     v-for="(flower, index) in flowers"
                     :key="`flower-${index}`"
