@@ -41,7 +41,7 @@ function createFlower(drawing: Drawing) {
             <div class="min-h-[400px] w-full bg-lime-400">
                 <svg
                     :height="CANVAS_SIZE"
-                    :viewBox="`0 0 ${CANVAS_SIZE * 2} ${CANVAS_SIZE * 2}`"
+                    :viewBox="`0 0 ${CANVAS_SIZE} ${CANVAS_SIZE}`"
                     :width="CANVAS_SIZE"
                 >
                     <template v-if="petalDrawing">
@@ -50,12 +50,12 @@ function createFlower(drawing: Drawing) {
                             :fill="petalDrawing.color"
                             stroke="black"
                             stroke-linejoin="bevel"
-                            stroke-width="5"
+                            stroke-width="4"
                         />
 
                         <circle
-                            :cx="CANVAS_SIZE"
-                            :cy="CANVAS_SIZE"
+                            :cx="CANVAS_SIZE / 2"
+                            :cy="CANVAS_SIZE / 2"
                             fill="blue"
                             r="20"
                         />

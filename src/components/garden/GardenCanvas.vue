@@ -88,14 +88,28 @@ function drawLine(pointerPoint: Point) {
     context.value.lineCap = 'round';
     context.value.strokeStyle = curColor.value;
 
-    // Set the start position of the stroke segment.
-    context.value.moveTo(cursorPosition.x, cursorPosition.y);
+    // Store the point old point.
+    const prevPos = {...cursorPosition};
 
     // Update the position.
     updatePosition(pointerPoint);
 
-    // Set the end position of the stroke segment.
+    // Set the draw line and it's mirrored copies along the axis.
+    // The default line.
+    context.value.moveTo(prevPos.x, prevPos.y);
     context.value.lineTo(cursorPosition.x, cursorPosition.y);
+
+    // The line mirrored along the X axis.
+    context.value.moveTo(prevPos.x, props.canvasSize - prevPos.y);
+    context.value.lineTo(cursorPosition.x, props.canvasSize - cursorPosition.y);
+
+    // The line mirrored along the Y axis.
+    context.value.moveTo(props.canvasSize - prevPos.x, prevPos.y);
+    context.value.lineTo(props.canvasSize - cursorPosition.x, cursorPosition.y);
+
+    // The line mirrored along the X and Y axis.
+    context.value.moveTo(props.canvasSize - prevPos.x, props.canvasSize - prevPos.y);
+    context.value.lineTo(props.canvasSize - cursorPosition.x, props.canvasSize - cursorPosition.y);
 
     // Draw stroke segment.
     context.value.stroke();
@@ -257,25 +271,25 @@ function convertStrokesToPath() {
 
             const topRightPath = [
                 // Path mirrored along the Y axis. Will be either second or last path.
-                `L${props.canvasSize * 2 - end.x} ${end.y}`,
-                ...revPoints.map(({x, y}) => `L${props.canvasSize * 2 - x} ${y}`),
+                `L${props.canvasSize - end.x} ${end.y}`,
+                ...revPoints.map(({x, y}) => `L${props.canvasSize - x} ${y}`),
             ];
 
             const bottomLeftPath = [
                 // Path mirrored along the X axis. Will be either second or last path.
-                `L${end.x} ${props.canvasSize * 2 - end.y}`,
-                ...revPoints.map(({x, y}) => `L${x} ${props.canvasSize * 2 - y}`),
+                `L${end.x} ${props.canvasSize - end.y}`,
+                ...revPoints.map(({x, y}) => `L${x} ${props.canvasSize - y}`),
             ];
 
             const bottomRightPath = [
                 // Path mirrored along both the X and Y axis. Will always be the third path.
-                `L${props.canvasSize * 2 - start.x} ${props.canvasSize * 2 - start.y}`,
-                ...points.map(({x, y}) => `L${props.canvasSize * 2 - x} ${props.canvasSize * 2 - y}`),
+                `L${props.canvasSize - start.x} ${props.canvasSize - start.y}`,
+                ...points.map(({x, y}) => `L${props.canvasSize - x} ${props.canvasSize - y}`),
             ];
 
-            // We check if the line was ended closer to the X or Y axis to determine which
-            // way to order the top right and bottom left paths.
-            const continueAlongX = end.x >= end.y;
+            // We check if the line was ended closer to the X or Y axis of the canvas center to
+            // determine which way to order the top right and bottom left paths.
+            const continueAlongX = Math.abs(end.x - props.canvasSize / 2) < Math.abs(end.y - props.canvasSize / 2);
 
             return [
                 topLeftPath,
@@ -331,18 +345,28 @@ onMounted(() => {
                 />
             </div>
 
-            <canvas
-                ref="canvas"
-                v-hide-magic-cursor
-                :height="canvasSize"
-                :width="canvasSize"
-                class="cursor-default bg-white"
-                @mousedown="startNewMouseStroke"
-                @mouseenter="startNewMouseStroke"
-                @mousemove="drawMouseLine"
-                @touchmove="drawTouchLine"
-                @touchstart="startNewTouchStroke"
-            />
+            <div class="relative">
+                <canvas
+                    ref="canvas"
+                    v-hide-magic-cursor
+                    :height="canvasSize"
+                    :width="canvasSize"
+                    class="cursor-default bg-white"
+                    @mousedown="startNewMouseStroke"
+                    @mouseenter="startNewMouseStroke"
+                    @mousemove="drawMouseLine"
+                    @touchmove="drawTouchLine"
+                    @touchstart="startNewTouchStroke"
+                />
+
+                <div
+                    class="
+                    pointer-events-none inset-0
+                    before:pointer-events-none before:absolute before:inset-y-0 before:left-1/2 before:w-px before:bg-black
+                    after:pointer-events-none after:absolute after:inset-x-0 after:top-1/2 after:h-px after:bg-black
+                "
+                />
+            </div>
         </div>
 
         <div class="flex flex-col gap-4">
