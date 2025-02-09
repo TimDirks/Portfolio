@@ -10,7 +10,7 @@ const emit = defineEmits<{
     (event: 'artworkCreated', drawing: Drawing): void;
 }>();
 
-interface Point {
+export interface Point {
     x: number;
     y: number;
 }
@@ -84,7 +84,7 @@ function drawLine(pointerPoint: Point) {
 
     context.value.beginPath();
 
-    context.value.lineWidth = 5;
+    context.value.lineWidth = 3;
     context.value.lineCap = 'round';
     context.value.strokeStyle = curColor.value;
 
@@ -119,8 +119,8 @@ function drawLine(pointerPoint: Point) {
 // Point argument has coordinates relative to the view port, not relative to the canvas
 function updatePosition(pointerPoint: Point) {
     // Set the cursor position by the point coordinates offset by the canvas bounds.
-    cursorPosition.x = pointerPoint.x - canvasBounds.value!.left;
-    cursorPosition.y = pointerPoint.y - canvasBounds.value!.top;
+    cursorPosition.x = (pointerPoint.x - canvasBounds.value!.left) | 0;
+    cursorPosition.y = (pointerPoint.y - canvasBounds.value!.top) | 0;
 
     // Get the latest (and thus current) stroke.
     const currentStroke = drawStrokes.value[drawStrokes.value.length - 1];
@@ -207,8 +207,8 @@ function startNewStroke(pointerPoint: Point) {
     }
 
     // Set the cursor position by the point coordinates offset by the canvas bounds.
-    cursorPosition.x = pointerPoint.x - canvasBounds.value.left;
-    cursorPosition.y = pointerPoint.y - canvasBounds.value.top;
+    cursorPosition.x = (pointerPoint.x - canvasBounds.value.left) | 0;
+    cursorPosition.y = (pointerPoint.y - canvasBounds.value.top) | 0;
 
     // If the last item from the draw stroke array has more than 1 entry, add a new array
     // to store coordinates for the new stroke.
