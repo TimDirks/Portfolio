@@ -28,6 +28,8 @@ const centerColor = computed(() => {
     // Parse the number back to a HEX color string
     return `#${compColor.toString(16)}`;
 });
+
+const centerRadius = ((Math.random() * 10) + 15) | 0;
 </script>
 
 <template>
@@ -48,7 +50,7 @@ const centerColor = computed(() => {
                 :cx="canvasSize / 2"
                 :cy="canvasSize / 2"
                 :fill="centerColor"
-                r="20"
+                :r="centerRadius"
             />
         </svg>
 
