@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-defineProps({
+const props = defineProps({
     canvasSize: {
         type: Number,
         default: 200,
@@ -14,7 +14,20 @@ defineProps({
     },
 });
 
-const flippedStem = Boolean(Date.now() % 2);
+const flippedStem = !!Math.round(Math.random());
+
+// A quick, easy but not 100% accurate (but close enough) way to get a
+// complementary color.
+// See: https://stackoverflow.com/a/21924155/5793873
+const centerColor = computed(() => {
+    // Convert the HEX color to a number.
+    const decColor = Number(`0x${props.color.slice(1)}`);
+    // XOR the number from a central, neutral color.
+    const compColor = 0x808080 ^ decColor;
+
+    // Parse the number back to a HEX color string
+    return `#${compColor.toString(16)}`;
+});
 </script>
 
 <template>
@@ -34,7 +47,7 @@ const flippedStem = Boolean(Date.now() % 2);
             <circle
                 :cx="canvasSize / 2"
                 :cy="canvasSize / 2"
-                fill="blue"
+                :fill="centerColor"
                 r="20"
             />
         </svg>
