@@ -4,6 +4,7 @@ const props = defineProps({
         type: Number,
         default: 200,
     },
+    disabled: Boolean,
 });
 
 const emit = defineEmits<{
@@ -78,7 +79,7 @@ function drawTouchLine(ev: TouchEvent) {
 
 // Point argument has coordinates relative to the view port, not relative to the canvas
 function drawLine(pointerPoint: Point) {
-    if (!context.value || !canvasBounds.value) {
+    if (props.disabled || !context.value || !canvasBounds.value) {
         return;
     }
 
@@ -202,7 +203,7 @@ function startNewTouchStroke(ev: TouchEvent) {
 
 // Point argument has coordinates relative to the view port, not relative to the canvas
 function startNewStroke(pointerPoint: Point) {
-    if (!canvasBounds.value) {
+    if (props.disabled || !canvasBounds.value) {
         return;
     }
 
@@ -222,7 +223,7 @@ function startNewStroke(pointerPoint: Point) {
 
 function selectColor(color: string) {
     // Don't allow color changes when a drawing has already been started.
-    if (hasDrawing.value) {
+    if (props.disabled || hasDrawing.value) {
         return;
     }
 
@@ -329,18 +330,18 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="flex items-center gap-8">
-        <div class="flex items-center gap-2">
+    <div class="flex flex-col items-center gap-4">
+        <div class="relative flex items-center">
             <div
                 v-hide-magic-cursor
-                class="grid cursor-default grid-cols-2 gap-1"
+                class="absolute -left-2 grid -translate-x-full cursor-default grid-cols-2 gap-1"
             >
                 <div
                     v-for="color in AVAILABLE_COLORS"
                     :key="`canvas-color-${color}`"
                     :class="[
                         color === curColor ? 'border-white' : 'border-transparent',
-                        hasDrawing ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
+                        (hasDrawing || disabled) ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
                     ]"
                     :style="`background-color: ${color};`"
                     class="size-6 border-2 transition"
@@ -348,7 +349,10 @@ onMounted(() => {
                 />
             </div>
 
-            <div class="relative">
+            <div
+                :class="{ 'pointer-events-none opacity-50': disabled }"
+                class="relative transition-opacity"
+            >
                 <canvas
                     ref="canvas"
                     v-hide-magic-cursor
@@ -372,14 +376,16 @@ onMounted(() => {
             </div>
         </div>
 
-        <div class="flex flex-col gap-4">
+        <div class="flex gap-4">
             <UiButton
+                :disabled="disabled || !hasDrawing"
                 :label="$t('garden.actions.clear')"
                 @click="clearCanvas"
             />
 
             <UiButton
-                :label="$t('garden.actions.plant')"
+                :disabled="disabled || !hasDrawing"
+                :label="$t('garden.actions.save')"
                 @click="exportArtwork"
             />
         </div>

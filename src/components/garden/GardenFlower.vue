@@ -40,7 +40,7 @@ const centerRadius = computed(() => props.preview ? 20 : ((Math.random() * 10 + 
 <template>
     <div
         :class="{ 'animate-sway': !preview }"
-        class="relative origin-[50%_140%]"
+        class="relative origin-bottom"
     >
         <svg
             :viewBox="`0 0 ${canvasSize} ${canvasSize}`"
