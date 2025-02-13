@@ -12,9 +12,14 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    preview: Boolean,
 });
 
-const flippedStem = !!Math.round(Math.random());
+const flippedStem = computed(() => {
+    return props.preview
+        ? false
+        : !!Math.round(Math.random());
+});
 
 // A quick, easy but not 100% accurate (but close enough) way to get a
 // complementary color.
@@ -29,14 +34,17 @@ const centerColor = computed(() => {
     return `#${compColor.toString(16)}`;
 });
 
-const centerRadius = ((Math.random() * 10) + 15) | 0;
+const centerRadius = computed(() => props.preview ? 20 : ((Math.random() * 10 + 15) | 0));
 </script>
 
 <template>
-    <div class="animate-sway relative origin-[50%_140%]">
+    <div
+        :class="{ 'animate-sway': !preview }"
+        class="relative origin-[50%_140%]"
+    >
         <svg
             :viewBox="`0 0 ${canvasSize} ${canvasSize}`"
-            class="relative z-10"
+            class="relative z-10 size-24 lg:size-32"
         >
             <path
                 :d="petalPath"
@@ -55,8 +63,9 @@ const centerRadius = ((Math.random() * 10) + 15) | 0;
         </svg>
 
         <div
+            v-if="!preview"
             :class="{ '-scale-x-100': flippedStem }"
-            class="flower-stem absolute left-1/2 top-1/2 h-5/6 w-8 -translate-x-1/2 border-[5px] border-transparent border-r-green-800"
+            class="flower-stem relative left-1/2 -mt-10 h-20 w-8 -translate-x-1/2 border-[5px] border-transparent border-r-green-800 lg:-mt-14 lg:h-[6.5rem]"
         >
             <div class="flower-leaf -translate-y-4/6 absolute left-full top-1/2 size-6 origin-top-left rotate-[-30deg] bg-green-500" />
         </div>
