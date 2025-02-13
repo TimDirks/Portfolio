@@ -4,10 +4,14 @@
 
 <template>
     <div class="garden-lawn relative h-52 max-w-4xl bg-emerald-600">
-        <GardenGrass class="absolute left-[15%] top-[70%] w-8" />
+        <GardenGrass class="absolute left-[12%] top-[70%] w-8" />
         <GardenGrass class="absolute left-[35%] top-[20%] w-8" />
         <GardenGrass class="absolute left-[58%] top-[40%] w-8" />
         <GardenGrass class="absolute left-[87%] top-[60%] w-8" />
+
+        <GardenStones class="absolute left-[17%] top-[30%] w-8" />
+        <GardenStones class="absolute left-[45%] top-[65%] w-8 rotate-45" />
+        <GardenStones class="absolute left-[73%] top-1/4 w-8 -rotate-45" />
 
         <slot />
 
