@@ -15,7 +15,7 @@
 
         <slot />
 
-        <div class="garden-bunny absolute left-[71%] top-[67%] h-12 w-20 -rotate-6 bg-rose-50">
+        <div class="garden-bunny absolute left-[71%] top-[67%] h-12 w-20 origin-bottom bg-rose-50">
             <div class="absolute -left-1 top-2 size-4 rounded-full bg-rose-50" />
             <div class="bunny-ears absolute -top-4 right-4 h-8 w-3 rotate-[-30deg] border-l border-t border-slate-200 bg-rose-50" />
             <div class="absolute right-3 top-5 size-2 rounded-full bg-slate-950" />
@@ -31,6 +31,7 @@
 
 .garden-bunny {
     border-radius: 70% 90% 60% 50%;
+    animation: bunny-hop 3s infinite;
 
     .bunny-ears {
         border-radius: 50% 100% 0 0;
@@ -40,6 +41,15 @@
     .bunny-nose {
         border-radius: 50% 50% 35% 90%/35% 45% 25% 90%;
         animation: nose-wiggle 1s infinite;
+    }
+}
+
+@keyframes bunny-hop {
+    0%, 20%, 100% {
+        transform: translateY(0) rotateZ(-6deg);
+    }
+    10% {
+        transform: translateY(-.25rem) rotateZ(-9deg);
     }
 }
 

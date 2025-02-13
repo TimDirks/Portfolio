@@ -36,6 +36,7 @@ export default {
         title: 'The garden',
         actions: {
             clear: 'Clear',
+            reset: 'Reset',
             save: 'Save',
             see_garden: 'See your garden',
         },

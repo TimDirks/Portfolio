@@ -44,6 +44,10 @@ function createFlower(drawing: Drawing) {
 
     flowers.value.push(drawing);
 }
+
+function resetGarden() {
+    // TODO implement
+}
 </script>
 
 <template>
@@ -106,24 +110,31 @@ function createFlower(drawing: Drawing) {
                 />
             </div>
 
-            <GardenLawn
+            <div
                 v-else
-                class="flex w-full flex-wrap"
+                class="flex w-full flex-col items-center gap-8"
             >
-                <div
-                    v-for="(position, index) in FLOWER_POSITIONS"
-                    :key="`flower-${position}`"
-                    :class="position"
-                    class="absolute -translate-x-1/2 -translate-y-full"
-                >
-                    <GardenFlower
-                        v-if="flowers[index % MAX_FLOWERS]"
-                        :canvas-size="CANVAS_SIZE"
-                        :color="flowers[index % MAX_FLOWERS].color"
-                        :petal-path="flowers[index % MAX_FLOWERS].path"
-                    />
-                </div>
-            </GardenLawn>
+                <GardenLawn class="flex w-full flex-wrap">
+                    <div
+                        v-for="(position, index) in FLOWER_POSITIONS"
+                        :key="`flower-${position}`"
+                        :class="position"
+                        class="absolute -translate-x-1/2 -translate-y-full"
+                    >
+                        <GardenFlower
+                            v-if="flowers[index % MAX_FLOWERS]"
+                            :canvas-size="CANVAS_SIZE"
+                            :color="flowers[index % MAX_FLOWERS].color"
+                            :petal-path="flowers[index % MAX_FLOWERS].path"
+                        />
+                    </div>
+                </GardenLawn>
+
+                <UiButton
+                    :label="$t('garden.actions.reset')"
+                    @click="resetGarden"
+                />
+            </div>
         </div>
     </div>
 </template>
