@@ -11,13 +11,20 @@ definePageMeta({
         </h1>
 
         <div class="flex h-full flex-col items-center justify-center gap-4">
-            <UiButton :to="{ name: 'romy.guess-who' }">
-                {{ $t('romy.actions.to_guess_who') }}
-            </UiButton>
+            <UiButton
+                :label="$t('romy.actions.to_guess_who')"
+                :to="{ name: 'romy.guess-who' }"
+            />
 
-            <UiButton :to="{ name: 'romy.countdown' }">
-                {{ $t('romy.actions.to_countdown') }}
-            </UiButton>
+            <UiButton
+                :label="$t('romy.actions.to_countdown')"
+                :to="{ name: 'romy.countdown' }"
+            />
+
+            <UiButton
+                :label="$t('romy.actions.to_garden')"
+                :to="{ name: 'romy.garden' }"
+            />
         </div>
     </div>
 </template>
