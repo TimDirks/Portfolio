@@ -39,6 +39,8 @@ function resetGarden() {
     // Hide the garden and show the canvas.
     showGarden.value = false;
 }
+
+// TODO Information thing
 </script>
 
 <template>
