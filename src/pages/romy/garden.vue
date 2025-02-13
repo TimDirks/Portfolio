@@ -8,13 +8,13 @@ definePageMeta({
 const CANVAS_SIZE = 200;
 
 const FLOWER_POSITIONS = [
-    'left-[7%] top-[75%]',
-    'left-[25%] top-[45%]',
-    'left-[42%] top-[90%]',
-    'left-[52%] top-[22%]',
-    'left-[64%] top-[58%]',
-    'left-[81%] top-[82%]',
-    'left-[93%] top-[42%]',
+    'left-[7%] top-[75%] z-[5]',
+    'left-[25%] top-[45%] z-[3]',
+    'left-[42%] top-[90%] z-[7]',
+    'left-[52%] top-[22%] z-[1]',
+    'left-[64%] top-[58%] z-[4]',
+    'left-[81%] top-[82%] z-[6]',
+    'left-[93%] top-[42%] z-[2]',
 ];
 
 const MAX_FLOWERS = 3;
@@ -51,7 +51,7 @@ function resetGarden() {
 </script>
 
 <template>
-    <div class="container mx-auto my-4 flex grow flex-col px-4 md:my-16">
+    <div class="container mx-auto my-4 flex grow flex-col overflow-hidden px-4 md:my-16">
         <div class="relative mb-4 px-12">
             <UiButtonIcon
                 :to="{ name: 'romy.index' }"
@@ -64,7 +64,7 @@ function resetGarden() {
             </h1>
         </div>
 
-        <div class="flex h-full flex-col items-center justify-center gap-16">
+        <div class="flex h-full flex-col items-center justify-center gap-8 lg:gap-16">
             <GardenCanvas
                 v-if="!showGarden"
                 :canvas-size="CANVAS_SIZE"
@@ -112,7 +112,7 @@ function resetGarden() {
 
             <div
                 v-else
-                class="flex w-full flex-col items-center gap-8"
+                class="my-8 flex w-full flex-col items-center gap-8"
             >
                 <GardenLawn class="flex w-full flex-wrap">
                     <div
