@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import type {Drawing} from '@/components/garden/GardenCanvas.vue';
 
+interface Flower extends Drawing {
+    animationDelay: number;
+}
+
 definePageMeta({
     name: 'romy.garden',
 });
@@ -20,7 +24,7 @@ const FLOWER_POSITIONS = [
 const MAX_FLOWERS = 3;
 
 const showGarden = ref<boolean>(false);
-const flowers = ref<Array<Drawing>>([]);
+const flowers = ref<Array<Flower>>([]);
 
 const allFlowersDrawn = computed(() => flowers.value.length >= MAX_FLOWERS);
 
@@ -29,7 +33,13 @@ function createFlower(drawing: Drawing) {
         return;
     }
 
-    flowers.value.push(drawing);
+    // Generate a random delay (in seconds) between 0 and 3s.
+    const delay = Math.round(Math.random() * 30) / 10;
+
+    flowers.value.push({
+        ...drawing,
+        animationDelay: delay,
+    });
 }
 
 function resetGarden() {
@@ -121,6 +131,7 @@ function resetGarden() {
                             :canvas-size="CANVAS_SIZE"
                             :color="flowers[index % MAX_FLOWERS].color"
                             :petal-path="flowers[index % MAX_FLOWERS].path"
+                            :style="`animation-delay: -${flowers[index % MAX_FLOWERS].animationDelay * index}s`"
                         />
                     </div>
                 </GardenLawn>
