@@ -11,6 +11,15 @@
     }
 }
 
+@keyframes sway {
+    0%, 100% {
+        transform: rotate(-6deg);
+    }
+    50% {
+        transform: rotate(6deg);
+    }
+}
+
 /* Pop Up Sprite Animations */
 @keyframes look-left-right {
     0%, 100% {
