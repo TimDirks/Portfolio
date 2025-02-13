@@ -39,8 +39,6 @@ function resetGarden() {
     // Hide the garden and show the canvas.
     showGarden.value = false;
 }
-
-// TODO Information thing
 </script>
 
 <template>
@@ -57,51 +55,55 @@ function resetGarden() {
             </h1>
         </div>
 
-        <div class="flex h-full flex-col items-center justify-center gap-8 lg:gap-16">
-            <GardenCanvas
-                v-if="!showGarden"
-                :canvas-size="CANVAS_SIZE"
-                :disabled="allFlowersDrawn"
-                @artwork-created="createFlower"
-            />
+        <div class="flex h-full flex-col items-center justify-center">
+            <template v-if="!showGarden">
+                <div class="mb-8 lg:mb-12">
+                    <h3 class="mb-4 text-center lg:mb-6">
+                        {{ $t('garden.subtitle') }}
+                    </h3>
 
-            <div
-                v-if="!showGarden"
-                class="flex flex-col items-center gap-4"
-            >
-                <div class="flex gap-4">
-                    <div
-                        v-for="(_, index) in MAX_FLOWERS"
-                        :key="`preview-flower-${index}`"
-                        :class="{ 'border-dashed': !flowers[index] }"
-                        class="rounded-xl border border-slate-200 bg-gray-950"
-                    >
-                        <GardenFlower
-                            v-if="flowers[index]"
-                            :canvas-size="CANVAS_SIZE"
-                            :color="flowers[index].color"
-                            :petal-path="flowers[index].path"
-                            preview
-                        />
-
-                        <div
-                            v-else
-                            class="flex size-24 items-center justify-center lg:size-32"
-                        >
-                            <Icon
-                                name="ph:flower-tulip"
-                                size="24"
-                            />
-                        </div>
-                    </div>
+                    <GardenCanvas
+                        :canvas-size="CANVAS_SIZE"
+                        :disabled="allFlowersDrawn"
+                        @artwork-created="createFlower"
+                    />
                 </div>
 
-                <UiButton
-                    :disabled="!allFlowersDrawn"
-                    :label="$t('garden.actions.see_garden')"
-                    @click="showGarden = true"
-                />
-            </div>
+                <div class="flex flex-col items-center gap-4">
+                    <div class="flex gap-4">
+                        <div
+                            v-for="(_, index) in MAX_FLOWERS"
+                            :key="`preview-flower-${index}`"
+                            :class="{ 'border-dashed': !flowers[index] }"
+                            class="rounded-xl border-2 border-slate-600 bg-gray-700"
+                        >
+                            <GardenFlower
+                                v-if="flowers[index]"
+                                :canvas-size="CANVAS_SIZE"
+                                :color="flowers[index].color"
+                                :petal-path="flowers[index].path"
+                                preview
+                            />
+
+                            <div
+                                v-else
+                                class="flex size-24 items-center justify-center text-gray-300 lg:size-32"
+                            >
+                                <Icon
+                                    name="ph:flower-tulip"
+                                    size="24"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <UiButton
+                        :disabled="!allFlowersDrawn"
+                        :label="$t('garden.actions.see_garden')"
+                        @click="showGarden = true"
+                    />
+                </div>
+            </template>
 
             <div
                 v-else

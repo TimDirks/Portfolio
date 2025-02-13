@@ -33,6 +33,7 @@ export default {
         codeBaseLinkText: 'code base here',
     },
     garden: {
+        subtitle: 'Pick a color & draw a flower',
         title: 'The garden',
         actions: {
             clear: 'Clear',
