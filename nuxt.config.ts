@@ -32,11 +32,6 @@ export default defineNuxtConfig({
         enabled: true,
     },
 
-    routeRules: {
-        // Don't add any /romy/** URLs to the sitemap.xml
-        '/romy/**': {robots: false, sitemap: false},
-    },
-
     css: [
         '~/assets/scss/animations.scss',
     ],
