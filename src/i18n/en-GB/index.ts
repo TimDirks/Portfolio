@@ -17,78 +17,15 @@ export default {
     contact: {
         body: 'Eager to see more of me or want to send me a message?',
     },
-    countdown: {
-        days: 'Day | Days',
-        end_date_title: 'Time until our next kiss',
-        hours: 'Hour | Hours',
-        minutes: 'Minute | Minutes',
-        progress_title: 'Progress',
-        seconds: 'Second | Seconds',
-        start_date_title: 'Time since our last kiss',
-        title: 'Time between kisses',
-    },
     footer: {
         body: 'Curious how I write code? Check out this site\'s {url}',
         codeBaseLink: 'https://github.com/TimDirks/portfolio',
         codeBaseLinkText: 'code base here',
     },
-    garden: {
-        subtitle: 'Pick a color & draw a flower',
-        title: 'The garden',
-        actions: {
-            clear: 'Clear',
-            reset: 'Reset',
-            save: 'Save',
-            see_garden: 'See your garden',
-        },
-    },
-    guess_who: {
-        lets_play: 'Lets play!',
-        select_card: 'Select your card to play',
-        select_theme: 'Select a theme',
-        title: 'Guess who?',
-        actions: {
-            confirm_choice: 'Confirm choice',
-        },
-        themes: [
-            {
-                label: 'Animals',
-                key: 'animals',
-            },
-            {
-                label: 'Familiar faces',
-                key: 'familiar_faces',
-            },
-            {
-                label: 'Funny faces',
-                key: 'funny_faces',
-            },
-            {
-                label: 'Household Objects',
-                key: 'household_objects',
-            },
-            {
-                label: 'Kids',
-                key: 'kids',
-            },
-            {
-                label: 'Monsters',
-                key: 'monsters',
-            },
-        ],
-    },
     introduction: {
         subtitle: 'Software engineer & Front end wizkid',
         title: 'Tim Dirks',
         titlePrefix: 'Hi there, I\'m',
-    },
-    romy: {
-        title: 'For the best girlfriend ever <3',
-        actions: {
-            to_countdown: 'Kiss timer',
-            to_garden: 'The garden',
-            to_guess_who: 'Guess who',
-        },
     },
     socials: {
         actions: {
